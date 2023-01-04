@@ -1,0 +1,7 @@
+Package: ADD_PRO_HRV_CVD
+Type: Project
+Version: 0.0.1
+Imports:
+    knitr,
+    rmarkdown
+Encoding: UTF-8

@@ -1,0 +1,23 @@
+---
+title: "abstrac_edeg_2022"
+format: docx
+editor: visual
+---
+
+## Introduction
+
+Autonomic dysfunction are well established a complication in diabetes. In addition it has been observed in prediabetes. Lifestyle and cardiometabolic risk factors are associated with deterioration of autonomic function, by mostly short-term HRV. The associations invistigated by longer HRV measurement spading over several days, including activity from daily patterns have not been studied extensively. The aim of this study is to quantify age, sex, lifestyle, and cardiometabolic factors cross-sectional association with long-term week HRV indices.
+
+## Methods
+
+Data were obtained from 1,230 participants of the danish ADDITION-PRO study in the period between 2009-2010. Cardiometabolic markers were determined from anthropometric measures, blood samples and blood pressure measurement, while lifestyle factors smoking and alcohol where self-reported and physical activity where determined from Actiheart. Heart rate variability (HRV) indices, including the standard deviation of normal-to-normal heart beat intervals (SDNN) was estimated from up to seven days of continuous eltrocardiograms recordings, based on 30-second mean inter-beat intervals (IBI). We include the exposure of age, sex, lifestyle factors, measurements of glucose, lipids, and blood pressure. We used linear regression to quantify the univariate association between each exposure and HRV indices, and then conducted multiple linear regression with age and sex included as confounders. We included people with only complete information on exposures and had measured HRV based on a least 48 hours.
+
+## Results
+
+The mean age were 66 (7), and 52 % were men. The population had a mean (SD) SDNN at 11.6 ms (4.1). The cardiovascular risk factors age, sex (being women), smoking, HbA1c, triglycerides, body mass index, waist circumference, fat percent, and higher diastolic blood pressure was negatively associated with SDNN (see table 1).
+
+## Conclusion
+
+Age, smoking, markers for glucose, triglycerides, overweight where found to deteriorate long-term measurement of HRV, and hence associated with autonomic dysfunction. Further studies of the which HRV cyclic parts (morning, afternoon, night) of the circadian rhythm are most influenced by CVD risk factors.
+
+Include lifestyle factors coefficient with age and sex adjustments

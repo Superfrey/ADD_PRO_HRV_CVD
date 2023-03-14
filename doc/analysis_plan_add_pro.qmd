@@ -1,0 +1,257 @@
+---
+title: "analysis_plan_ADD_PRO"
+format: html
+editor: visual
+---
+
+# Statistical analysis plan:
+
+## Long-term weekly heart rate variability associations with cardiovascular disease in prediabetes -- a prospective cohort-study from the ADDITION-PRO
+
+**Jonas R. Schaarup^1^,** Lasse Bjerg^2^, Christian S. Hansen^3^, Annelli Sandbæk^1,2^, Dorte Vistisen^3,4^, Daniel R. Witte^1,2^
+
+^1^Department of Public Health, Aarhus University, Denmark; ^2^ Steno Diabetes Center Aarhus, Aarhus University Hospital, Denmark; ^3^ Steno Diabetes Center Copenhagen, Copenhagen, Denmark; ^4^Department of Public Health, University of Copenhagen, Copenhagen, Denmark
+
+ORCID identifier(s)
+
+.......
+
+Corresponding author
+
+Jonas R. Schaarup
+
+Work address: Steno Diabetes Center Aarhus, Palle Juul-Jensens Boulevard 11, Aarhus N, 8200, DK
+
+E-mail: jfrscha\@ph.au.dk
+
+Phone number: +45 29936899
+
+Frequencies (percentages) and medians (lower and upper quartiles) will be calculated to describe categorical and continuous variables, respectively. These descriptive statistics will be presented in the table. Table 1 gives an overview of the study population general characteristics (demographic, lifestyle, bio markers). Prevalence and incidence rate of cardiovascular events (myocardial infarction, stroke, and heart failure), will be shown in table 2. Flow of participation will be shown in figure 1.
+
+We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure). We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 3.
+
+Complete case analyses will be conducted in the R statistical computing environment (version X). 
+
+\
+
+List of variables
+
++----------------------------------------------------------+
+| Variables from ADDITION-PRO dataset                      |
++==========================================================+
+| Age                                                      |
++----------------------------------------------------------+
+| Sex                                                      |
++----------------------------------------------------------+
+| Socioeconomic status                                     |
++----------------------------------------------------------+
+| Smoking status                                           |
++----------------------------------------------------------+
+| Physical activity (PAEE kj_kg_day)                       |
++----------------------------------------------------------+
+| Alcohol comsuption                                       |
++----------------------------------------------------------+
+| BMI                                                      |
++----------------------------------------------------------+
+| Waist circumference                                      |
++----------------------------------------------------------+
+| Fat percentage                                           |
++----------------------------------------------------------+
+| Systolic blood pressure                                  |
++----------------------------------------------------------+
+| Diastolic blood pressure                                 |
++----------------------------------------------------------+
+| HbA1c                                                    |
++----------------------------------------------------------+
+| LDL cholestorol                                          |
++----------------------------------------------------------+
+| HDL cholesterol                                          |
++----------------------------------------------------------+
+| Triglycerides                                            |
++----------------------------------------------------------+
+| Mean heart rate                                          |
++----------------------------------------------------------+
+| Median heart rate                                        |
++----------------------------------------------------------+
+| *Heart rate variability indices*                         |
+|                                                          |
+| -   Standard deviation of Normal to Normal intervals     |
+|                                                          |
+| -   Root mean squared of successive RR intervals         |
+|                                                          |
+| -   pNN50                                                |
+|                                                          |
+| -   SDSD                                                 |
+|                                                          |
+| -   High frequency                                       |
+|                                                          |
+| -   Low frequency                                        |
+|                                                          |
+| -   LF / HF ratio                                        |
+|                                                          |
+| -   Ultra low frequency                                  |
+|                                                          |
+| -   Ultra high frequency                                 |
++----------------------------------------------------------+
+| **Variables from DST -** *cardiovascular disease events* |
++----------------------------------------------------------+
+| Myocardial infarction                                    |
++----------------------------------------------------------+
+| Stroke                                                   |
++----------------------------------------------------------+
+| Heart failure                                            |
++----------------------------------------------------------+
+
+The data indicates which survey is the variable from.
+
+**Table 1** Population characteristics by diabetes status
+
++--------------------------------------------------+----------------------------------+
+|                                                  | Study population in ADDITION-PRO |
++==================================================+==================================+
+| Age (years)                                      |                                  |
++--------------------------------------------------+----------------------------------+
+| Sex (male)                                       |                                  |
++--------------------------------------------------+----------------------------------+
+| Socioeconomic status                             |                                  |
++--------------------------------------------------+----------------------------------+
+| Smoking status                                   |                                  |
++--------------------------------------------------+----------------------------------+
+| Physical activity (PAEE kj_kg_day)               |                                  |
++--------------------------------------------------+----------------------------------+
+| Alcohol comsuption                               |                                  |
++--------------------------------------------------+----------------------------------+
+| BMI                                              |                                  |
++--------------------------------------------------+----------------------------------+
+| Waist circumference                              |                                  |
++--------------------------------------------------+----------------------------------+
+| Fat percentage                                   |                                  |
++--------------------------------------------------+----------------------------------+
+| Systolic blood pressure                          |                                  |
++--------------------------------------------------+----------------------------------+
+| Diastolic blood pressure                         |                                  |
++--------------------------------------------------+----------------------------------+
+| HbA1c                                            |                                  |
++--------------------------------------------------+----------------------------------+
+| LDL cholestorol                                  |                                  |
++--------------------------------------------------+----------------------------------+
+| HDL cholesterol                                  |                                  |
++--------------------------------------------------+----------------------------------+
+| Triglycerides                                    |                                  |
++--------------------------------------------------+----------------------------------+
+| Mean heart rate                                  |                                  |
++--------------------------------------------------+----------------------------------+
+| Median heart rate                                |                                  |
++--------------------------------------------------+----------------------------------+
+| Standard deviation of Normal to Normal intervals |                                  |
++--------------------------------------------------+----------------------------------+
+| Root mean squared of successive RR intervals     |                                  |
++--------------------------------------------------+----------------------------------+
+| pNN50                                            |                                  |
++--------------------------------------------------+----------------------------------+
+| SDSD                                             |                                  |
++--------------------------------------------------+----------------------------------+
+| High frequency                                   |                                  |
++--------------------------------------------------+----------------------------------+
+| Low frequency                                    |                                  |
++--------------------------------------------------+----------------------------------+
+| Low frequency / high frequency ratio             |                                  |
++--------------------------------------------------+----------------------------------+
+| Ultra low frequency                              |                                  |
++--------------------------------------------------+----------------------------------+
+| Ultra high frequency                             |                                  |
++--------------------------------------------------+----------------------------------+
+
+**Table 2** Technology use, data sharing view and AI knowledge by diabetes status
+
+|                         | **Model 1** | **Model 2** | **Model 3\*** |
+|-------------------------|-------------|-------------|---------------|
+|                         | n=x         | n=x         | n=y           |
+| **Advantage over risk** |             |             |               |
+| Diabetes status         |             |             |               |
+| T1D                     |             |             |               |
+| T2D                     |             |             | 1             |
+| No diabetes             | 1           | 1           | \-            |
+| Age (per year)          |             |             |               |
+| Sex (male vs. female)   |             |             |               |
+| SES                     |             |             |               |
+| Low                     | \-          |             |               |
+| Medium (reference)      | \-          | 1           | 1             |
+| High                    | \-          |             |               |
+| HLQ score               | \-          |             |               |
+| Tech. use               | \-          |             |               |
+| Data sharing (AI)       | \-          |             |               |
+| Diabetes tech. use      | \-          | \-          |               |
+| PAM-13                  | \-          | \-          |               |
+
+\*diabetes patients only
+
+**Table 4** Determinants of a positive response to AI-powered technologies in different scenarios
+
++-----------------------+--------------+--------------+---------------+
+|                       | **Model 1**  | **Model 2**  | **Model 3\*** |
++=======================+==============+==============+===============+
+|                       | n=x          | n=x          | n=y           |
++-----------------------+--------------+--------------+---------------+
+| **Positive response\  |              |              |               |
+| to scenarios#**       |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| Diabetes status       |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| T1D                   |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| T2D                   |              |              | 1             |
++-----------------------+--------------+--------------+---------------+
+| No diabetes           | 1            | 1            | \-            |
++-----------------------+--------------+--------------+---------------+
+| Age (per year)        |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| Sex (male vs. female) |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| SES                   |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| Low                   | \-           |              |               |
++-----------------------+--------------+--------------+---------------+
+| Medium (reference)    | \-           | 1            | 1             |
++-----------------------+--------------+--------------+---------------+
+| High                  | \-           |              |               |
++-----------------------+--------------+--------------+---------------+
+| HLQ score             | \-           |              |               |
++-----------------------+--------------+--------------+---------------+
+| Heard of AI           | \-           |              |               |
++-----------------------+--------------+--------------+---------------+
+| Tech. use             | \-           |              |               |
++-----------------------+--------------+--------------+---------------+
+| Data sharing (score)  |              |              |               |
++-----------------------+--------------+--------------+---------------+
+| Diabetes tech. use    | \-           | \-           |               |
++-----------------------+--------------+--------------+---------------+
+| PAM-13                | \-           | \-           |               |
++-----------------------+--------------+--------------+---------------+
+
+**Figure 2**
+
+```{r}
+#| echo: false
+#| warning: false
+
+# Load required packages
+library(ggplot2)
+
+# Create example data
+set.seed(123)
+heart_rate_variability <- seq(20, 100, length.out = 200)
+hrv_haz <- exp(-0.01 * (heart_rate_variability - 50)^2) +
+  0.2 * exp(-0.02 * (heart_rate_variability - 35)^2) +
+  0.15 * exp(-0.03 * (heart_rate_variability - 70)^2) +
+  0.1 * exp(-0.04 * (heart_rate_variability - 85)^2)
+
+# Create plot
+ggplot(data.frame(heart_rate_variability, hrv_haz), aes(x = heart_rate_variability, y = hrv_haz)) +
+  geom_line(size = 1.2, alpha = 0.8, color = "#0072B2") +
+  scale_x_continuous(limits = c(20, 100), breaks = seq(20, 100, by = 10)) +
+  scale_y_continuous(limits = c(0.0, 1.5), breaks = seq(0.5, 1.5, by = 0.25)) +
+  theme_classic() +
+  xlab("Heart rate variability") +
+  ylab("Hazard ratio")
+```

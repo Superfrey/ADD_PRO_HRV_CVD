@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>analysis_plan_ADD_PRO</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="analysis_plan_add_pro_files/libs/clipboard/clipboard.min.js"></script>
+<script src="analysis_plan_add_pro_files/libs/quarto-html/quarto.js"></script>
+<script src="analysis_plan_add_pro_files/libs/quarto-html/popper.min.js"></script>
+<script src="analysis_plan_add_pro_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="analysis_plan_add_pro_files/libs/quarto-html/anchor.min.js"></script>
+<link href="analysis_plan_add_pro_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="analysis_plan_add_pro_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="analysis_plan_add_pro_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="analysis_plan_add_pro_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="analysis_plan_add_pro_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">analysis_plan_ADD_PRO</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="statistical-analysis-plan" class="level1">
+<h1>Statistical analysis plan:</h1>
+<section id="long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro" class="level2">
+<h2 class="anchored" data-anchor-id="long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro">Long-term weekly heart rate variability associations with cardiovascular disease in prediabetes – a prospective cohort-study from the ADDITION-PRO</h2>
+<p><strong>Jonas R. Schaarup<sup>1</sup>,</strong> Lasse Bjerg<sup>2</sup>, Christian S. Hansen<sup>3</sup>, Annelli Sandbæk<sup>1,2</sup>, Dorte Vistisen<sup>3,4</sup>, Daniel R. Witte<sup>1,2</sup></p>
+<p><sup>1</sup>Department of Public Health, Aarhus University, Denmark; <sup>2</sup> Steno Diabetes Center Aarhus, Aarhus University Hospital, Denmark; <sup>3</sup> Steno Diabetes Center Copenhagen, Copenhagen, Denmark; <sup>4</sup>Department of Public Health, University of Copenhagen, Copenhagen, Denmark</p>
+<p>ORCID identifier(s)</p>
+<p>…….</p>
+<p>Corresponding author</p>
+<p>Jonas R. Schaarup</p>
+<p>Work address: Steno Diabetes Center Aarhus, Palle Juul-Jensens Boulevard 11, Aarhus N, 8200, DK</p>
+<p>E-mail: jfrscha@ph.au.dk</p>
+<p>Phone number: +45 29936899</p>
+<p>Frequencies (percentages) and medians (lower and upper quartiles) will be calculated to describe categorical and continuous variables, respectively. These descriptive statistics will be presented in the table. Table 1 gives an overview of the study population general characteristics (demographic, lifestyle, bio markers). Prevalence and incidence rate of cardiovascular events (myocardial infarction, stroke, and heart failure), will be shown in table 2. Flow of participation will be shown in figure 1.</p>
+<p>We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure). We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 3.</p>
+<p>Complete case analyses will be conducted in the R statistical computing environment (version X).&nbsp;</p>
+<p><br>
+</p>
+<p>List of variables</p>
+<table class="table">
+<colgroup>
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables from ADDITION-PRO dataset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Age</td>
+</tr>
+<tr class="even">
+<td>Sex</td>
+</tr>
+<tr class="odd">
+<td>Socioeconomic status</td>
+</tr>
+<tr class="even">
+<td>Smoking status</td>
+</tr>
+<tr class="odd">
+<td>Physical activity (PAEE kj_kg_day)</td>
+</tr>
+<tr class="even">
+<td>Alcohol comsuption</td>
+</tr>
+<tr class="odd">
+<td>BMI</td>
+</tr>
+<tr class="even">
+<td>Waist circumference</td>
+</tr>
+<tr class="odd">
+<td>Fat percentage</td>
+</tr>
+<tr class="even">
+<td>Systolic blood pressure</td>
+</tr>
+<tr class="odd">
+<td>Diastolic blood pressure</td>
+</tr>
+<tr class="even">
+<td>HbA1c</td>
+</tr>
+<tr class="odd">
+<td>LDL cholestorol</td>
+</tr>
+<tr class="even">
+<td>HDL cholesterol</td>
+</tr>
+<tr class="odd">
+<td>Triglycerides</td>
+</tr>
+<tr class="even">
+<td>Mean heart rate</td>
+</tr>
+<tr class="odd">
+<td>Median heart rate</td>
+</tr>
+<tr class="even">
+<td><p><em>Heart rate variability indices</em></p>
+<ul>
+<li><p>Standard deviation of Normal to Normal intervals</p></li>
+<li><p>Root mean squared of successive RR intervals</p></li>
+<li><p>pNN50</p></li>
+<li><p>SDSD</p></li>
+<li><p>High frequency</p></li>
+<li><p>Low frequency</p></li>
+<li><p>LF / HF ratio</p></li>
+<li><p>Ultra low frequency</p></li>
+<li><p>Ultra high frequency</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td><strong>Variables from DST -</strong> <em>cardiovascular disease events</em></td>
+</tr>
+<tr class="even">
+<td>Myocardial infarction</td>
+</tr>
+<tr class="odd">
+<td>Stroke</td>
+</tr>
+<tr class="even">
+<td>Heart failure</td>
+</tr>
+</tbody>
+</table>
+<p>The data indicates which survey is the variable from.</p>
+<p><strong>Table 1</strong> Population characteristics by diabetes status</p>
+<table class="table">
+<colgroup>
+<col style="width: 59%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Study population in ADDITION-PRO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Age (years)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sex (male)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Socioeconomic status</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Smoking status</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Physical activity (PAEE kj_kg_day)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Alcohol comsuption</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>BMI</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Waist circumference</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Fat percentage</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Systolic blood pressure</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Diastolic blood pressure</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>HbA1c</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>LDL cholestorol</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>HDL cholesterol</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Triglycerides</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Mean heart rate</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Median heart rate</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Standard deviation of Normal to Normal intervals</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Root mean squared of successive RR intervals</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>pNN50</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SDSD</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>High frequency</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Low frequency</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Low frequency / high frequency ratio</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Ultra low frequency</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ultra high frequency</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 2</strong> Technology use, data sharing view and AI knowledge by diabetes status</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Model 1</strong></th>
+<th><strong>Model 2</strong></th>
+<th><strong>Model 3*</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>n=x</td>
+<td>n=x</td>
+<td>n=y</td>
+</tr>
+<tr class="even">
+<td><strong>Advantage over risk</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Diabetes status</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>T1D</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>T2D</td>
+<td></td>
+<td></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>No diabetes</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Age (per year)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sex (male vs.&nbsp;female)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SES</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Low</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Medium (reference)</td>
+<td>-</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>High</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>HLQ score</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Tech. use</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Data sharing (AI)</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Diabetes tech. use</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>PAM-13</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>*diabetes patients only</p>
+<p><strong>Table 4</strong> Determinants of a positive response to AI-powered technologies in different scenarios</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Model 1</strong></th>
+<th><strong>Model 2</strong></th>
+<th><strong>Model 3*</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>n=x</td>
+<td>n=x</td>
+<td>n=y</td>
+</tr>
+<tr class="even">
+<td><strong>Positive response<br>
+to scenarios#</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Diabetes status</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>T1D</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>T2D</td>
+<td></td>
+<td></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>No diabetes</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Age (per year)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sex (male vs.&nbsp;female)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SES</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Low</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Medium (reference)</td>
+<td>-</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>High</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>HLQ score</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Heard of AI</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Tech. use</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Data sharing (score)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Diabetes tech. use</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>PAM-13</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 2</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_plan_add_pro_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

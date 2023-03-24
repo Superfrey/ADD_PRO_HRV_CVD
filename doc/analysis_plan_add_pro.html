@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>analysis_plan_ADD_PRO</title>
+<title>Statistical analysis plan for ADDITION PRO study</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">analysis_plan_ADD_PRO</h1>
+<h1 class="title">Statistical analysis plan for ADDITION PRO study</h1>
 </div>
 
 
@@ -59,10 +59,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="statistical-analysis-plan" class="level1">
-<h1>Statistical analysis plan:</h1>
-<section id="long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro" class="level2">
-<h2 class="anchored" data-anchor-id="long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro">Long-term weekly heart rate variability associations with cardiovascular disease in prediabetes – a prospective cohort-study from the ADDITION-PRO</h2>
+<section id="title-long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro" class="level2">
+<h2 class="anchored" data-anchor-id="title-long-term-weekly-heart-rate-variability-associations-with-cardiovascular-disease-in-prediabetes-a-prospective-cohort-study-from-the-addition-pro">Title: Long-term weekly heart rate variability associations with cardiovascular disease in prediabetes – a prospective cohort-study from the ADDITION-PRO</h2>
 <p><strong>Jonas R. Schaarup<sup>1</sup>,</strong> Lasse Bjerg<sup>2</sup>, Christian S. Hansen<sup>3</sup>, Annelli Sandbæk<sup>1,2</sup>, Dorte Vistisen<sup>3,4</sup>, Daniel R. Witte<sup>1,2</sup></p>
 <p><sup>1</sup>Department of Public Health, Aarhus University, Denmark; <sup>2</sup> Steno Diabetes Center Aarhus, Aarhus University Hospital, Denmark; <sup>3</sup> Steno Diabetes Center Copenhagen, Copenhagen, Denmark; <sup>4</sup>Department of Public Health, University of Copenhagen, Copenhagen, Denmark</p>
 <p>ORCID identifier(s)</p>
@@ -72,107 +70,147 @@ ul.task-list li input[type="checkbox"] {
 <p>Work address: Steno Diabetes Center Aarhus, Palle Juul-Jensens Boulevard 11, Aarhus N, 8200, DK</p>
 <p>E-mail: jfrscha@ph.au.dk</p>
 <p>Phone number: +45 29936899</p>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>Incusion criteria for the participants</p>
 <p>Frequencies (percentages) and medians (lower and upper quartiles) will be calculated to describe categorical and continuous variables, respectively. These descriptive statistics will be presented in the table. Table 1 gives an overview of the study population general characteristics (demographic, lifestyle, bio markers). Prevalence and incidence rate of cardiovascular events (myocardial infarction, stroke, and heart failure), will be shown in table 2. Flow of participation will be shown in figure 1.</p>
-<p>We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure). We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 3.</p>
+<p>We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. Because of biological differences in sex in the development CVD and women having a lower heart rate variability than men, we want to investigate the stratified association by sex.</p>
+<p>To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 2.</p>
 <p>Complete case analyses will be conducted in the R statistical computing environment (version X).&nbsp;</p>
-<p><br>
-</p>
+</section>
+<section id="tables-and-figures" class="level3">
+<h3 class="anchored" data-anchor-id="tables-and-figures">Tables and Figures</h3>
 <p>List of variables</p>
 <table class="table">
 <colgroup>
-<col style="width: 81%">
+<col style="width: 83%">
+<col style="width: 13%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Variables from ADDITION-PRO dataset</th>
+<th><strong>Variables from ADDITION-PRO dataset</strong></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Age</td>
+<td>Age (years)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Sex</td>
+<td>Sex (male)</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Socioeconomic status</td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Smoking status</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Physical activity (PAEE kj_kg_day)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Alcohol comsuption</td>
+<td>Alcohol comsuption (units per week)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>BMI</td>
+<td>BMI (kg/m<sup>2</sup>)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Waist circumference</td>
+<td>Waist circumference (cm)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Fat percentage</td>
+<td>Fat percentage ( % )</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Systolic blood pressure</td>
+<td>Systolic blood pressure (mm hg)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Diastolic blood pressure</td>
+<td>Diastolic blood pressure (mm hg)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>HbA1c</td>
+<td>HbA1c (%)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>LDL cholestorol</td>
+<td>LDL cholestorol (mmol/L)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>HDL cholesterol</td>
+<td>HDL cholesterol (mmol/L)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Triglycerides</td>
+<td>Triglycerides (mmol/L)</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>Mean heart rate</td>
+<td>Mean heart rate (bpm)</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Median heart rate</td>
+<td>Median heart rate (bpm)</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><p><em>Heart rate variability indices</em></p>
 <ul>
-<li><p>Standard deviation of Normal to Normal intervals</p></li>
-<li><p>Root mean squared of successive RR intervals</p></li>
-<li><p>pNN50</p></li>
-<li><p>SDSD</p></li>
-<li><p>High frequency</p></li>
-<li><p>Low frequency</p></li>
+<li><p>Standard deviation of Normal to Normal intervals (ms)</p></li>
+<li><p>Root mean squared of successive RR intervals (ms)</p></li>
+<li><p>pNN50 (ms)</p></li>
+<li><p>SDSD (ms)</p></li>
+<li><p>High frequency (ms<sup>2</sup>)</p></li>
+<li><p>Low frequency (ms<sup>2</sup>)</p></li>
 <li><p>LF / HF ratio</p></li>
-<li><p>Ultra low frequency</p></li>
-<li><p>Ultra high frequency</p></li>
+<li><p>Ultra low frequency (ms<sup>2</sup>)</p></li>
+<li><p>Ultra high frequency (ms<sup>2</sup>)</p></li>
 </ul></td>
+<td></td>
 </tr>
 <tr class="odd">
+<td><p>Medication use?</p>
+<ul>
+<li><p>Glucose lowering medication</p></li>
+<li><p>Cardioprotective medication</p>
+<ul>
+<li><p>antihypentensive</p></li>
+<li><p>lipid lowering</p></li>
+</ul></li>
+</ul></td>
+<td></td>
+</tr>
+<tr class="even">
 <td><strong>Variables from DST -</strong> <em>cardiovascular disease events</em></td>
-</tr>
-<tr class="even">
-<td>Myocardial infarction</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Stroke</td>
+<td>Myocardial infarction</td>
+<td></td>
 </tr>
 <tr class="even">
+<td>Stroke</td>
+<td></td>
+</tr>
+<tr class="odd">
 <td>Heart failure</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>The data indicates which survey is the variable from.</p>
 <p><strong>Table 1</strong> Population characteristics by diabetes status</p>
 <table class="table">
 <colgroup>
-<col style="width: 59%">
-<col style="width: 40%">
+<col style="width: 61%">
+<col style="width: 38%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -202,336 +240,201 @@ ul.task-list li input[type="checkbox"] {
 <td></td>
 </tr>
 <tr class="even">
-<td>Alcohol comsuption</td>
+<td>Alcohol comsuption (units per week)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>BMI</td>
+<td>BMI (kg/m<sup>2</sup>)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Waist circumference</td>
+<td>Waist circumference (cm)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Fat percentage</td>
+<td>Fat percentage ( % )</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Systolic blood pressure</td>
+<td>Systolic blood pressure (mm hg)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Diastolic blood pressure</td>
+<td>Diastolic blood pressure (mm hg)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>HbA1c</td>
+<td>HbA1c (%)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>LDL cholestorol</td>
+<td>LDL cholestorol (mmol/L)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>HDL cholesterol</td>
+<td>HDL cholesterol (mmol/L)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Triglycerides</td>
+<td>Triglycerides (mmol/L)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Mean heart rate</td>
+<td>Mean heart rate (bpm)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Median heart rate</td>
+<td>Median heart rate (bpm)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Standard deviation of Normal to Normal intervals</td>
+<td>Standard deviation of Normal to Normal intervals (ms)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Root mean squared of successive RR intervals</td>
+<td>Root mean squared of successive RR intervals (ms)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>pNN50</td>
+<td>pNN50 (ms)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>SDSD</td>
+<td>SDSD (ms)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>High frequency</td>
+<td>High frequency (ms<sup>2</sup>)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Low frequency</td>
+<td>Low frequency (ms<sup>2</sup>)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Low frequency / high frequency ratio</td>
+<td>Low frequency / high frequency (ratio)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Ultra low frequency</td>
+<td>Ultra low frequency (ms<sup>2</sup>)</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Ultra high frequency</td>
+<td>Ultra high frequency (ms<sup>2</sup>)</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Table 2</strong> Technology use, data sharing view and AI knowledge by diabetes status</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Model 1</strong></th>
-<th><strong>Model 2</strong></th>
-<th><strong>Model 3*</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>n=x</td>
-<td>n=x</td>
-<td>n=y</td>
-</tr>
-<tr class="even">
-<td><strong>Advantage over risk</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Diabetes status</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>T1D</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>T2D</td>
-<td></td>
-<td></td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>No diabetes</td>
-<td>1</td>
-<td>1</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>Age (per year)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Sex (male vs.&nbsp;female)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>SES</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Low</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Medium (reference)</td>
-<td>-</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>High</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>HLQ score</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tech. use</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Data sharing (AI)</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Diabetes tech. use</td>
-<td>-</td>
-<td>-</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>PAM-13</td>
-<td>-</td>
-<td>-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>*diabetes patients only</p>
-<p><strong>Table 4</strong> Determinants of a positive response to AI-powered technologies in different scenarios</p>
+<p><strong>Table 2</strong> CVD and mortality incident in study population</p>
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 22%">
+<col style="width: 17%">
+<col style="width: 38%">
+<col style="width: 44%">
 </colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th><strong>Model 1</strong></th>
-<th><strong>Model 2</strong></th>
-<th><strong>Model 3*</strong></th>
+<th>Incidents CVD (cases per 1000 year)</th>
+<th>Incidents mortality (cases per 1000 year)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>All</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1st tertile HRV</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2nd tertile HRV</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3rd tertile HRV</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 3</strong> Heart rate variability indices associated with CVD</p>
+<table class="table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Model 1: HR (95% CI)</strong></th>
+<th></th>
+<th><strong>Model 2: HR (95% CI)</strong></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td></td>
+<td>CVD events</td>
+<td>All cause mortality</td>
+<td>CVD events</td>
+<td>All cause mortality</td>
+</tr>
+<tr class="even">
+<td></td>
 <td>n=x</td>
+<td></td>
 <td>n=x</td>
-<td>n=y</td>
-</tr>
-<tr class="even">
-<td><strong>Positive response<br>
-to scenarios#</strong></td>
-<td></td>
-<td></td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>Diabetes status</td>
-<td></td>
-<td></td>
-<td></td>
+<td>SDNN (per unit)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
 </tr>
 <tr class="even">
-<td>T1D</td>
-<td></td>
-<td></td>
-<td></td>
+<td>RMSSD (per unit)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
+<td>0.xx (0.xx - 1.xx=</td>
 </tr>
 <tr class="odd">
-<td>T2D</td>
-<td></td>
-<td></td>
-<td>1</td>
+<td>High frequency (per unit)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
 </tr>
 <tr class="even">
-<td>No diabetes</td>
-<td>1</td>
-<td>1</td>
-<td>-</td>
+<td>Low frequency (per unit)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
+<td>0.xx (0.xx - 1.xx)</td>
 </tr>
 <tr class="odd">
-<td>Age (per year)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Sex (male vs.&nbsp;female)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>SES</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Low</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Medium (reference)</td>
-<td>-</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>High</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>HLQ score</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Heard of AI</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tech. use</td>
-<td>-</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Data sharing (score)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Diabetes tech. use</td>
-<td>-</td>
-<td>-</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>PAM-13</td>
-<td>-</td>
-<td>-</td>
-<td></td>
+<td>mean HR (per unit)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
+<td>0.xx (0.xx - 0.xx)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Figure 2</strong></p>
+<p><strong>Figure 1</strong></p>
+<p>Flow chart</p>
+<p><strong>Figure 2 (example)</strong></p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="analysis_plan_add_pro_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>

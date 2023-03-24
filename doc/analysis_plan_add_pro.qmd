@@ -1,12 +1,10 @@
 ---
-title: "analysis_plan_ADD_PRO"
-format: html
+title: "Statistical analysis plan for ADDITION PRO study"
+format: pdf
 editor: visual
 ---
 
-# Statistical analysis plan:
-
-## Long-term weekly heart rate variability associations with cardiovascular disease in prediabetes -- a prospective cohort-study from the ADDITION-PRO
+## Title: Long-term weekly heart rate variability association with cardiovascular disease in prediabetes -- a prospective cohort-study from the ADDITION-PRO
 
 **Jonas R. Schaarup^1^,** Lasse Bjerg^2^, Christian S. Hansen^3^, Annelli Sandbæk^1,2^, Dorte Vistisen^3,4^, Daniel R. Witte^1,2^
 
@@ -26,210 +24,201 @@ E-mail: jfrscha\@ph.au.dk
 
 Phone number: +45 29936899
 
+\newpage
+
+### Description
+
+Inclusion criteria for the participants was having a least 48 hour measured heart rate and no prior CVD events before inclusion.
+
 Frequencies (percentages) and medians (lower and upper quartiles) will be calculated to describe categorical and continuous variables, respectively. These descriptive statistics will be presented in the table. Table 1 gives an overview of the study population general characteristics (demographic, lifestyle, bio markers). Prevalence and incidence rate of cardiovascular events (myocardial infarction, stroke, and heart failure), will be shown in table 2. Flow of participation will be shown in figure 1.
 
-We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure). We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 3.
+We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. Because of biological differences in sex in the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
 
-Complete case analyses will be conducted in the R statistical computing environment (version X). 
+To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 2.
 
-\
+Both with multiple imputation and complete case analyses will be conducted in the R statistical computing environment (version X). 
+
+\newpage
+
+### Tables and Figures
 
 List of variables
 
-+----------------------------------------------------------+
-| Variables from ADDITION-PRO dataset                      |
-+==========================================================+
-| Age                                                      |
-+----------------------------------------------------------+
-| Sex                                                      |
-+----------------------------------------------------------+
-| Socioeconomic status                                     |
-+----------------------------------------------------------+
-| Smoking status                                           |
-+----------------------------------------------------------+
-| Physical activity (PAEE kj_kg_day)                       |
-+----------------------------------------------------------+
-| Alcohol comsuption                                       |
-+----------------------------------------------------------+
-| BMI                                                      |
-+----------------------------------------------------------+
-| Waist circumference                                      |
-+----------------------------------------------------------+
-| Fat percentage                                           |
-+----------------------------------------------------------+
-| Systolic blood pressure                                  |
-+----------------------------------------------------------+
-| Diastolic blood pressure                                 |
-+----------------------------------------------------------+
-| HbA1c                                                    |
-+----------------------------------------------------------+
-| LDL cholestorol                                          |
-+----------------------------------------------------------+
-| HDL cholesterol                                          |
-+----------------------------------------------------------+
-| Triglycerides                                            |
-+----------------------------------------------------------+
-| Mean heart rate                                          |
-+----------------------------------------------------------+
-| Median heart rate                                        |
-+----------------------------------------------------------+
-| *Heart rate variability indices*                         |
-|                                                          |
-| -   Standard deviation of Normal to Normal intervals     |
-|                                                          |
-| -   Root mean squared of successive RR intervals         |
-|                                                          |
-| -   pNN50                                                |
-|                                                          |
-| -   SDSD                                                 |
-|                                                          |
-| -   High frequency                                       |
-|                                                          |
-| -   Low frequency                                        |
-|                                                          |
-| -   LF / HF ratio                                        |
-|                                                          |
-| -   Ultra low frequency                                  |
-|                                                          |
-| -   Ultra high frequency                                 |
-+----------------------------------------------------------+
-| **Variables from DST -** *cardiovascular disease events* |
-+----------------------------------------------------------+
-| Myocardial infarction                                    |
-+----------------------------------------------------------+
-| Stroke                                                   |
-+----------------------------------------------------------+
-| Heart failure                                            |
-+----------------------------------------------------------+
-
-The data indicates which survey is the variable from.
++-----------------------------------------------------------+------------+
+| **Variables from ADDITION-PRO dataset**                   |            |
++===========================================================+============+
+| Age (years)                                               |            |
++-----------------------------------------------------------+------------+
+| Sex (male)                                                |            |
++-----------------------------------------------------------+------------+
+| Socioeconomic status                                      |            |
++-----------------------------------------------------------+------------+
+| Smoking status                                            |            |
++-----------------------------------------------------------+------------+
+| Physical activity (PAEE kj_kg_day)                        |            |
++-----------------------------------------------------------+------------+
+| Alcohol comsuption (units per week)                       |            |
++-----------------------------------------------------------+------------+
+| BMI (kg/m^2^)                                             |            |
++-----------------------------------------------------------+------------+
+| Waist circumference (cm)                                  |            |
++-----------------------------------------------------------+------------+
+| Fat percentage ( % )                                      |            |
++-----------------------------------------------------------+------------+
+| Systolic blood pressure (mm hg)                           |            |
++-----------------------------------------------------------+------------+
+| Diastolic blood pressure (mm hg)                          |            |
++-----------------------------------------------------------+------------+
+| HbA1c (%)                                                 |            |
++-----------------------------------------------------------+------------+
+| LDL cholestorol (mmol/L)                                  |            |
++-----------------------------------------------------------+------------+
+| HDL cholesterol (mmol/L)                                  |            |
++-----------------------------------------------------------+------------+
+| Triglycerides (mmol/L)                                    |            |
++-----------------------------------------------------------+------------+
+| Mean heart rate (bpm)                                     |            |
++-----------------------------------------------------------+------------+
+| Median heart rate (bpm)                                   |            |
++-----------------------------------------------------------+------------+
+| *Heart rate variability indices*                          |            |
+|                                                           |            |
+| -   Standard deviation of Normal to Normal intervals (ms) |            |
+|                                                           |            |
+| -   Root mean squared of successive RR intervals (ms)     |            |
+|                                                           |            |
+| -   pNN50 (ms)                                            |            |
+|                                                           |            |
+| -   SDSD (ms)                                             |            |
+|                                                           |            |
+| -   High frequency (ms^2^)                                |            |
+|                                                           |            |
+| -   Low frequency (ms^2^)                                 |            |
+|                                                           |            |
+| -   LF / HF ratio                                         |            |
+|                                                           |            |
+| -   Ultra low frequency (ms^2^)                           |            |
+|                                                           |            |
+| -   Ultra high frequency (ms^2^)                          |            |
++-----------------------------------------------------------+------------+
+| Medication use?                                           |            |
+|                                                           |            |
+| -   Glucose lowering medication                           |            |
+|                                                           |            |
+| -   Cardioprotective medication                           |            |
+|                                                           |            |
+|     -   antihypentensive                                  |            |
+|                                                           |            |
+|     -   lipid lowering                                    |            |
++-----------------------------------------------------------+------------+
+| **Variables from DST -** *cardiovascular disease events*  |            |
++-----------------------------------------------------------+------------+
+| Myocardial infarction                                     |            |
++-----------------------------------------------------------+------------+
+| Stroke                                                    |            |
++-----------------------------------------------------------+------------+
+| Heart failure                                             |            |
++-----------------------------------------------------------+------------+
 
 **Table 1** Population characteristics by diabetes status
 
-+--------------------------------------------------+----------------------------------+
-|                                                  | Study population in ADDITION-PRO |
-+==================================================+==================================+
-| Age (years)                                      |                                  |
-+--------------------------------------------------+----------------------------------+
-| Sex (male)                                       |                                  |
-+--------------------------------------------------+----------------------------------+
-| Socioeconomic status                             |                                  |
-+--------------------------------------------------+----------------------------------+
-| Smoking status                                   |                                  |
-+--------------------------------------------------+----------------------------------+
-| Physical activity (PAEE kj_kg_day)               |                                  |
-+--------------------------------------------------+----------------------------------+
-| Alcohol comsuption                               |                                  |
-+--------------------------------------------------+----------------------------------+
-| BMI                                              |                                  |
-+--------------------------------------------------+----------------------------------+
-| Waist circumference                              |                                  |
-+--------------------------------------------------+----------------------------------+
-| Fat percentage                                   |                                  |
-+--------------------------------------------------+----------------------------------+
-| Systolic blood pressure                          |                                  |
-+--------------------------------------------------+----------------------------------+
-| Diastolic blood pressure                         |                                  |
-+--------------------------------------------------+----------------------------------+
-| HbA1c                                            |                                  |
-+--------------------------------------------------+----------------------------------+
-| LDL cholestorol                                  |                                  |
-+--------------------------------------------------+----------------------------------+
-| HDL cholesterol                                  |                                  |
-+--------------------------------------------------+----------------------------------+
-| Triglycerides                                    |                                  |
-+--------------------------------------------------+----------------------------------+
-| Mean heart rate                                  |                                  |
-+--------------------------------------------------+----------------------------------+
-| Median heart rate                                |                                  |
-+--------------------------------------------------+----------------------------------+
-| Standard deviation of Normal to Normal intervals |                                  |
-+--------------------------------------------------+----------------------------------+
-| Root mean squared of successive RR intervals     |                                  |
-+--------------------------------------------------+----------------------------------+
-| pNN50                                            |                                  |
-+--------------------------------------------------+----------------------------------+
-| SDSD                                             |                                  |
-+--------------------------------------------------+----------------------------------+
-| High frequency                                   |                                  |
-+--------------------------------------------------+----------------------------------+
-| Low frequency                                    |                                  |
-+--------------------------------------------------+----------------------------------+
-| Low frequency / high frequency ratio             |                                  |
-+--------------------------------------------------+----------------------------------+
-| Ultra low frequency                              |                                  |
-+--------------------------------------------------+----------------------------------+
-| Ultra high frequency                             |                                  |
-+--------------------------------------------------+----------------------------------+
++-------------------------------------------------------+----------------------------------+
+|                                                       | Study population in ADDITION-PRO |
++=======================================================+==================================+
+| Age (years)                                           |                                  |
++-------------------------------------------------------+----------------------------------+
+| Sex (male)                                            |                                  |
++-------------------------------------------------------+----------------------------------+
+| Socioeconomic status                                  |                                  |
++-------------------------------------------------------+----------------------------------+
+| Smoking status                                        |                                  |
++-------------------------------------------------------+----------------------------------+
+| Physical activity (PAEE kj_kg_day)                    |                                  |
++-------------------------------------------------------+----------------------------------+
+| Alcohol comsuption (units per week)                   |                                  |
++-------------------------------------------------------+----------------------------------+
+| BMI (kg/m^2^)                                         |                                  |
++-------------------------------------------------------+----------------------------------+
+| Waist circumference (cm)                              |                                  |
++-------------------------------------------------------+----------------------------------+
+| Fat percentage ( % )                                  |                                  |
++-------------------------------------------------------+----------------------------------+
+| Systolic blood pressure (mm hg)                       |                                  |
++-------------------------------------------------------+----------------------------------+
+| Diastolic blood pressure (mm hg)                      |                                  |
++-------------------------------------------------------+----------------------------------+
+| HbA1c (%)                                             |                                  |
++-------------------------------------------------------+----------------------------------+
+| LDL cholestorol (mmol/L)                              |                                  |
++-------------------------------------------------------+----------------------------------+
+| HDL cholesterol (mmol/L)                              |                                  |
++-------------------------------------------------------+----------------------------------+
+| Triglycerides (mmol/L)                                |                                  |
++-------------------------------------------------------+----------------------------------+
+| Mean heart rate (bpm)                                 |                                  |
++-------------------------------------------------------+----------------------------------+
+| Median heart rate (bpm)                               |                                  |
++-------------------------------------------------------+----------------------------------+
+| Standard deviation of Normal to Normal intervals (ms) |                                  |
++-------------------------------------------------------+----------------------------------+
+| Root mean squared of successive RR intervals (ms)     |                                  |
++-------------------------------------------------------+----------------------------------+
+| pNN50 (ms)                                            |                                  |
++-------------------------------------------------------+----------------------------------+
+| SDSD (ms)                                             |                                  |
++-------------------------------------------------------+----------------------------------+
+| High frequency (ms^2^)                                |                                  |
++-------------------------------------------------------+----------------------------------+
+| Low frequency (ms^2^)                                 |                                  |
++-------------------------------------------------------+----------------------------------+
+| Low frequency / high frequency (ratio)                |                                  |
++-------------------------------------------------------+----------------------------------+
+| Ultra low frequency (ms^2^)                           |                                  |
++-------------------------------------------------------+----------------------------------+
+| Ultra high frequency (ms^2^)                          |                                  |
++-------------------------------------------------------+----------------------------------+
 
-**Table 2** Technology use, data sharing view and AI knowledge by diabetes status
+**Table 2** CVD and mortality incident in study population
 
-|                         | **Model 1** | **Model 2** | **Model 3\*** |
-|-------------------------|-------------|-------------|---------------|
-|                         | n=x         | n=x         | n=y           |
-| **Advantage over risk** |             |             |               |
-| Diabetes status         |             |             |               |
-| T1D                     |             |             |               |
-| T2D                     |             |             | 1             |
-| No diabetes             | 1           | 1           | \-            |
-| Age (per year)          |             |             |               |
-| Sex (male vs. female)   |             |             |               |
-| SES                     |             |             |               |
-| Low                     | \-          |             |               |
-| Medium (reference)      | \-          | 1           | 1             |
-| High                    | \-          |             |               |
-| HLQ score               | \-          |             |               |
-| Tech. use               | \-          |             |               |
-| Data sharing (AI)       | \-          |             |               |
-| Diabetes tech. use      | \-          | \-          |               |
-| PAM-13                  | \-          | \-          |               |
++-----------------+-------------------------------------+-------------------------------------------+
+|                 | Incidents CVD (cases per 1000 year) | Incidents mortality (cases per 1000 year) |
++=================+=====================================+===========================================+
+| All             |                                     |                                           |
++-----------------+-------------------------------------+-------------------------------------------+
+| 1st tertile HRV |                                     |                                           |
++-----------------+-------------------------------------+-------------------------------------------+
+| 2nd tertile HRV |                                     |                                           |
++-----------------+-------------------------------------+-------------------------------------------+
+| 3rd tertile HRV |                                     |                                           |
++-----------------+-------------------------------------+-------------------------------------------+
 
-\*diabetes patients only
+**Table 3** Heart rate variability indices associated with CVD
 
-**Table 4** Determinants of a positive response to AI-powered technologies in different scenarios
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+|                           | **Model 1: HR (95% CI)** |                     | **Model 2: HR (95% CI)** |                     |
++===========================+==========================+=====================+==========================+=====================+
+|                           | CVD events               | All cause mortality | CVD events               | All cause mortality |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+|                           | n=x                      |                     | n=x                      |                     |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+| SDNN (per unit)           | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+| RMSSD (per unit)          | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx=  |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+| High frequency (per unit) | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+| Low frequency (per unit)  | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
+| mean HR (per unit)        | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  |
++---------------------------+--------------------------+---------------------+--------------------------+---------------------+
 
-+-----------------------+--------------+--------------+---------------+
-|                       | **Model 1**  | **Model 2**  | **Model 3\*** |
-+=======================+==============+==============+===============+
-|                       | n=x          | n=x          | n=y           |
-+-----------------------+--------------+--------------+---------------+
-| **Positive response\  |              |              |               |
-| to scenarios#**       |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Diabetes status       |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| T1D                   |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| T2D                   |              |              | 1             |
-+-----------------------+--------------+--------------+---------------+
-| No diabetes           | 1            | 1            | \-            |
-+-----------------------+--------------+--------------+---------------+
-| Age (per year)        |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Sex (male vs. female) |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| SES                   |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Low                   | \-           |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Medium (reference)    | \-           | 1            | 1             |
-+-----------------------+--------------+--------------+---------------+
-| High                  | \-           |              |               |
-+-----------------------+--------------+--------------+---------------+
-| HLQ score             | \-           |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Heard of AI           | \-           |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Tech. use             | \-           |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Data sharing (score)  |              |              |               |
-+-----------------------+--------------+--------------+---------------+
-| Diabetes tech. use    | \-           | \-           |               |
-+-----------------------+--------------+--------------+---------------+
-| PAM-13                | \-           | \-           |               |
-+-----------------------+--------------+--------------+---------------+
+\newpage
 
-**Figure 2**
+**Figure 1**
+
+Flow chart
+
+**Figure 2 (example)**
 
 ```{r}
 #| echo: false
@@ -248,7 +237,7 @@ hrv_haz <- exp(-0.01 * (heart_rate_variability - 50)^2) +
 
 # Create plot
 ggplot(data.frame(heart_rate_variability, hrv_haz), aes(x = heart_rate_variability, y = hrv_haz)) +
-  geom_line(size = 1.2, alpha = 0.8, color = "#0072B2") +
+  geom_line(size = 1.2, alpha = 0.8, color = "#880808") +
   scale_x_continuous(limits = c(20, 100), breaks = seq(20, 100, by = 10)) +
   scale_y_continuous(limits = c(0.0, 1.5), breaks = seq(0.5, 1.5, by = 0.25)) +
   theme_classic() +

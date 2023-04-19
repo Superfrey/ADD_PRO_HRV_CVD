@@ -1,34 +1,39 @@
-# R code shift
+# For preparation
+library(here)
+source(here("R/load_packages.R"))
+file <- here("data-raw/rr-interval/006.txt")
+data <- vroom(file, delim = ",")
 
-##files <- ___
+names(data)[1] <- "ibi"
 
-#############
+
+###################################################
 #Function for extracting ID number from file name
-extract_prono <- function(paths){
-    paths %>%
-        fs::path_file() %>%
-        stringr::str_extract("#.*#") %>%
-        stringr::str_to_lower() %>%
-        stringr::str_remove_all("#|pro")
-}
+#extract_prono <- function(paths){
+ #   paths %>%
+  #      fs::path_file() %>%
+   #     stringr::str_extract("#.*#") %>%
+    #    stringr::str_to_lower() %>%
+     #   stringr::str_remove_all("#|pro")
+#}
 
 ########################
-names(actiheart_data)
-ibi_function <- function(data) {
-    ibi_data <- data %>%
-        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds")
+#names(actiheart_data)
+#ibi_function <- function(data) {
+#    ibi_data <- data %>%
+#        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
+#               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
+#               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds")#
 
-    ibi_data <- ibi_data %>%
-        filter(timepoint >= 0)
+#    ibi_data <- ibi_data %>%
+#        filter(timepoint >= 0)
 
-    ibi_data <- ibi_data %>%
-        mutate(mean_ibi = 60000/Mean_HR,
-               upper_ibi = 60000/Lower_HR,
-               lower_ibi = 60000/Upper_HR)
+#    ibi_data <- ibi_data %>%
+#        mutate(mean_ibi = 60000/Mean_HR,
+ #              upper_ibi = 60000/Lower_HR,
+ #              lower_ibi = 60000/Upper_HR)
 
-    return(ibi_data)}
+  #  return(ibi_data)}
 
 #sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check
 #sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
@@ -38,52 +43,74 @@ ibi_function <- function(data) {
 
 ############################ Heart beat intervals #############
 
-ibi_function <- function(data) {
-    ibi_data <- data %>%
-        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds")
+#ibi_function <- function(data) {
+    #ibi_data <- data %>%
+    #    select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
+     #          "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
+     #          "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds")
 
-    ibi_data <- ibi_data %>%
-        filter( timepoint >= 0)
+   # ibi_data <- ibi_data %>%
+   #     filter( timepoint >= 0)
 
-    ibi_data <- ibi_data %>%
-        mutate(mean_ibi = 60000/Mean_HR,
-               upper_ibi = 60000/Lower_HR,
-               lower_ibi = 60000/Upper_HR)
+    #ibi_data <- ibi_data %>%
+    #    mutate(mean_ibi = 60000/Mean_HR,
+     #          upper_ibi = 60000/Lower_HR,
+      #         lower_ibi = 60000/Upper_HR)
 
-    ibi <- list()
+    #ibi <- list()
 
-    timepoint <- ibi_data$timepoint
+    #timepoint <- ibi_data$timepoint
 
-    for(i in timepoint) {
-        data_ibi <- ibi_data %>%
-            filter(timepoint == i) %>%
-            select(mean_ibi,upper_ibi,lower_ibi)
+   # for(i in timepoint) {
+      #  data_ibi <- ibi_data %>%
+       #     filter(timepoint == i) %>%
+        #    select(mean_ibi,upper_ibi,lower_ibi)
 
-        mean <- data_ibi$mean_ibi
+        #mean <- data_ibi$mean_ibi
 
-        n <- round(30000/mean)
+        #n <- round(30000/mean)
 
-        sd <- (data_ibi$upper_ibi-data_ibi$lower_ibi)/(2*1.96)
+        #sd <- (data_ibi$upper_ibi-data_ibi$lower_ibi)/(2*1.96)
 
-        ibi_val <- rnorm(n,mean = mean,sd = sd)
+        #ibi_val <- rnorm(n,mean = mean,sd = sd)
 
-        ibi <- c(ibi, list(ibi_val))
+       # ibi <- c(ibi, list(ibi_val))
 
-    }
+ #   }
 
-    ibi <- unlist(ibi)
+  #  ibi <- unlist(ibi)
 
-    return(ibi)}
+ #   return(ibi)}
 
-ini <- ibi_function(actiheart_data)
+#ini <- ibi_function(actiheart_data)
 
 
 
 ######################## heart rate #####################################################
-
+ibi <- data$ibi/1000
+ran_ibi <- sample(ibi)
 ######################### Time domain ####################################################
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateTimeAnalysis()
+no_shuf_HRV <- rr_data$TimeAnalysis
+no_shuf_HRV
+
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateTimeAnalysis()
+shuf_HRV <- rr_data$TimeAnalysis
+shuf_HRV
 
 # Create function for analysing hrv using individual vector values
 
@@ -107,6 +134,33 @@ rhrv_file_time_domain <- function(hrv_id_values) {
 }
 
 ######################### Frequency domain ####################################################
+ibi <- data$ibi/1000
+ran_ibi <- sample(ibi)
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    #RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CalculatePowerBand(size = 600,shift = 30)
+
+no_shuf_HRV <- rr_data$FreqAnalysis
+no_shuf_HRV
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    #RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CalculatePowerBand(size = 600,shift = 30)
+
+shuf_HRV <- rr_data$FreqAnalysis
+shuf_HRV
+
+cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
 
 # Create function for analysing hrv using individual vector values
 

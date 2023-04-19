@@ -37,7 +37,7 @@ sd <- (upper_pi - lower_pi) / (2 * z_score)
 cat("Standard deviation is:", sd)
 
 mean <- 110
-n <- 100 # number of observations
+n <- 1000 # number of observations
 
 # Simulate data
 simulated_data <- rnorm(n, mean, sd)
@@ -52,10 +52,35 @@ i <- 2 # start from second value
 
 while(i <= n){
     value <- rnorm(1, mean, sd) # generate new value
-    if(abs(value - simulated_data[i-1]) > 4){ # check condition
+    if(abs(value - simulated_data[i-1]) < 4){ # check condition
         simulated_data[i] <- value
         i <- i + 1
     }
 }
 
 simulated_data
+hist(simulated_data)
+
+################
+
+# Set the values
+mean <- 50
+sd <- 5
+sum_value <- 1000
+
+# Generate data with mean and sd
+obs <- numeric() # create an empty vector to store the observations
+total_sum <- 0
+while (total_sum < sum_value) {
+    obs <- c(obs, rnorm(1, mean, sd)) # generate one observation at a time
+    total_sum <- sum(obs) # calculate the current sum of observations
+}
+obs <- obs[-length(obs)] # remove the last observation that causes the sum to exceed the target value
+
+# Scale the data to have sum equal to sum_value
+simulated_data <- obs * (sum_value / sum(obs))
+
+# Print the simulated data and their sum
+print(simulated_data)
+cat("Sum of values: ", sum(simulated_data))
+

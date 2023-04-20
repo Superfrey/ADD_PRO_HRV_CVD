@@ -9,6 +9,7 @@ names(data)[1] <- "ibi"
 ######################## heart rate #####################################################
 ibi <- data$ibi/1000
 ran_ibi <- sample(ibi)
+
 ######################### Time domain ####################################################
 
 rr_data <-
@@ -68,8 +69,8 @@ shuf_HRV <- rr_data$FreqAnalysis
 shuf_HRV
 
 freq_test <- cbind(shuf_HRV[[1]], no_shuf_HRV[[1]])
-freq_test
 
+freq_test
 time_test
 
 # Create function for analysing hrv using individual vector values

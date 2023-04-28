@@ -91,14 +91,17 @@ ibi <- data$ibi/1000
 ran_ibi <- sample(ibi)
 ######################### Time domain ####################################################
 
+ibi <- cumsum(ibi)
+ran_ibi <- cumsum(ran_ibi)
+
 rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with an without
+   # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
-no_shuf_HRV <- rr_data$TimeAnalysis
+no_shuf_HRV <- rr_data$TimeAnalysis[[1]]
 no_shuf_HRV
 
 
@@ -106,15 +109,19 @@ rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ran_ibi) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with an without
+   # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
-shuf_HRV <- rr_data$TimeAnalysis
+shuf_HRV <- rr_data$TimeAnalysis[[1]]
 shuf_HRV
 
+
+cbind(no_shuf_HRV, shuf_HRV)
 # Create function for analysing hrv using individual vector values
 
 rhrv_file_time_domain <- function(hrv_id_values) {
+
+    hrv_id_values <- cumsum(hrv_id_values)
 
     rr_data <-
         RHRV::CreateHRVData() %>%
@@ -138,9 +145,9 @@ ibi <- data$ibi/1000
 ran_ibi <- sample(ibi)
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi2) %>%
+    RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-    #RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
@@ -150,7 +157,7 @@ no_shuf_HRV
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi_ran2) %>%
+    RHRV::LoadBeatVector(ran_ibi) %>%
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
@@ -161,8 +168,7 @@ shuf_HRV <- rr_data$FreqAnalysis
 shuf_HRV
 
 filter <- cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
-filter
-cbind(non_filter,filter)
+
 
 # Create function for analysing hrv using individual vector values
 

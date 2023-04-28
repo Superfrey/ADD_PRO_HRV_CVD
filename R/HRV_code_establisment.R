@@ -107,25 +107,22 @@ rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with an without
+   # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
 no_shuf_HRV <- rr_data$TimeAnalysis[[1]]
-no_shuf_HRV
+
 
 #########################
 rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ran_ibi) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with an without
+   # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
 shuf_HRV <- rr_data$TimeAnalysis[[1]]
-shuf_HRV
 
-
-cbind(no_shuf_HRV, shuf_HRV)
 # Create function for analysing hrv using individual vector values
 
 rhrv_file_time_domain <- function(hrv_id_values) {

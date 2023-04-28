@@ -88,28 +88,37 @@ names(data)[1] <- "ibi"
 
 ######################## heart rate #####################################################
 ibi <- data$ibi/1000
-ran_ibi <- sample(ibi)
+
+#######################
+ran_ibi <- data %>%
+    mutate(group = cumsum(ibi) %/% 30000)
+
+# Randomize values within each group
+ran_ibi <- ran_ibi %>%
+    group_by(group) %>%
+    mutate(ibi= sample(ibi))
+ran_ibi <- (cumsum(ran_ibi$ibi))/1000
 ######################### Time domain ####################################################
 
 ibi <- cumsum(ibi)
-ran_ibi <- cumsum(ran_ibi)
+
 
 rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-   # RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
 no_shuf_HRV <- rr_data$TimeAnalysis[[1]]
 no_shuf_HRV
 
-
+#########################
 rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ran_ibi) %>%
     RHRV::BuildNIHR()  %>%
-   # RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
 shuf_HRV <- rr_data$TimeAnalysis[[1]]

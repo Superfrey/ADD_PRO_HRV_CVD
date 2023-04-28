@@ -35,15 +35,30 @@ rr_data <-
     # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
-no_shuf_HRV <- rr_data$TimeAnalysis
-no_shuf_HRV
-
+vec_shuf_HRV <- rr_data$TimeAnalysis
+vec_shuf_HRV
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi2) %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    # RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateTimeAnalysis()
+
+r_HRV <- rr_data$TimeAnalysis
+r_HRV
+
+cbind(vec_shuf_HRV,r_HRV)
+
+## Frequency
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
+
+

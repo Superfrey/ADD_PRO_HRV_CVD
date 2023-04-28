@@ -138,7 +138,7 @@ ibi <- data$ibi/1000
 ran_ibi <- sample(ibi)
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::LoadBeatVector(ibi2) %>%
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
@@ -150,7 +150,7 @@ no_shuf_HRV
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::LoadBeatVector(ibi_ran2) %>%
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
@@ -160,7 +160,9 @@ rr_data <-
 shuf_HRV <- rr_data$FreqAnalysis
 shuf_HRV
 
-cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
+filter <- cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
+filter
+cbind(non_filter,filter)
 
 # Create function for analysing hrv using individual vector values
 

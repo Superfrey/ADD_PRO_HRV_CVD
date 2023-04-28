@@ -10,13 +10,14 @@ names(data)[1] <- "ibi"
 ibi <- data$ibi/1000
 ran_ibi <- sample(ibi)
 
+
 ######################### Time domain ####################################################
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::LoadBeatVector(ibi, scale = 1) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with, when having many beats
+   RHRV::FilterNIHR() %>%  #consider with, when having many beats
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
 no_shuf_HRV <- rr_data$TimeAnalysis
@@ -25,7 +26,7 @@ no_shuf_HRV
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::LoadBeatVector(ran_ibi, scale = 1)  %>%
     RHRV::BuildNIHR()  %>%
     RHRV::FilterNIHR() %>%  #consider with an with when having many beats
     RHRV::InterpolateNIHR() %>%
@@ -52,6 +53,11 @@ rr_data <-
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
+
+spectogram_freq <- PlotSpectrogram(rr_data, size = 600, shift = 30,
+                                   scale = "logaritmic",
+                                   freqRange = c(0,0.4))
+plot(spectogram_freq)
 
 no_shuf_HRV <- rr_data$FreqAnalysis
 no_shuf_HRV

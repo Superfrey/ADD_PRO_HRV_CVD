@@ -133,15 +133,19 @@ rhrv_file_time_domain <- function(hrv_id_values) {
         RHRV::CreateHRVData() %>%
         RHRV::LoadBeatVector(hrv_id_values) %>%
         RHRV::BuildNIHR()  %>%
-        # RHRV::FilterNIHR() %>%  #consider with an without
+        # RHRV::FilterNIHR() %>%  #consider with an without (no evidence for doing this in physionet data)
         RHRV::InterpolateNIHR() %>%
         RHRV::CreateTimeAnalysis()
 
     hrv_estimates <- data.frame(SDNN = rr_data$TimeAnalysis[[1]]$SDNN,
+                                SDANN = rr_data$TimeAnalysis[[1]]$SDANN,
+                                SDNNIDX = rr_data$TimeAnalysis[[1]]$SDNNIDX,
+                                TINN = rr_data$TimeAnalysis[[1]]$TINN,
+                                HRVi = rr_data$TimeAnalysis[[1]]$HRVi,
                                 RMSSD = rr_data$TimeAnalysis[[1]]$rMSSD,
                                 pNN50 = rr_data$TimeAnalysis[[1]]$pNN50,
                                 SDSD = rr_data$TimeAnalysis[[1]]$SDSD,
-                                SDANN = rr_data$TimeAnalysis[[1]]$SDANN)
+                                )
 
     return(hrv_estimates)
 }
@@ -168,12 +172,120 @@ rr_data <-
     #RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
-    RHRV::CalculatePowerBand(size = 600,shift = 30)
+    RHRV::CalculatePowerBand(size = 600,shift = 30, indexFreqAnalysis = 1,type = "fourier")
 
 shuf_HRV <- rr_data$FreqAnalysis
 shuf_HRV
 
 filter <- cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
+
+###################################################################
+
+
+ibi <- cumsum(data$ibi/1000)
+#######################
+ran_ibi <- data %>%
+    mutate(group = cumsum(ibi) %/% 30000)
+
+# Randomize values within each group
+ran_ibi <- ran_ibi %>%
+    group_by(group) %>%
+    mutate(ibi= sample(ibi))
+ran_ibi <- (cumsum(ran_ibi$ibi))/1000
+
+rr_data <- RHRV::CreateHRVData()
+rr_data <- RHRV::LoadBeatVector(rr_data,ibi)
+rr_data <- RHRV::BuildNIHR(rr_data)
+rr_data <- RHRV::FilterNIHR(rr_data)
+rr_data <- RHRV::InterpolateNIHR(rr_data) #freqhr = 4
+rr_data <- RHRV::CreateTimeAnalysis(rr_data)
+rr_data <- RHRV::CreateFreqAnalysis(rr_data)
+rr_data <- RHRV::CalculatePowerBand(rr_data, size = 600, shift = 30)
+
+#rr_data$FreqAnalysis[[1]]
+ #                                   size = 8000, shift = 8000,
+  #                                  sizesp = 8000,
+   #                                 type = "fourier",
+    #                                ULFmin = 0, ULFmax = 0.03,
+     #                               VLFmin = 0.03, VLFmax = 0.05,
+      #                              LFmin = 0.05, LFmax = 0.15,
+       #                             HFmin = 0.15, HFmax = 0.4)
+
+mean_frq_domain <- as.data.frame(rr_data$FreqAnalysis[[1]]) %>%
+    mutate(HFmean = mean(HF),
+           LFmean = mean(LF),
+           LF_HFmean = mean(LFHF))
+
+mean_frq_domain <- mean_frq_domain %>%
+    select(HFmean, LFmean, LF_HFmean) %>%
+    slice(1)
+
+mean_frq_domain
+#########################################################################
+
+
+plot_frq <- plot_frq %>%
+    mutate(TPmean = mean(HRV),
+           HFmean = mean(HF),
+           LFmean = mean(LF),
+           LF_HFmean = mean(LFHF))
+non_order <- plot_frq %>%
+    select(TPmean,HFmean,LFmean,LF_HFmean) %>%
+    slice(1)
+
+order <- plot_frq %>%
+select(TPmean,HFmean,LFmean,LF_HFmean) %>%
+    slice(1)
+
+cbind(order,non_order)
+
+
+
+names(rr_data$FreqAnalysis[[1]]$HRV)
+summary(rr_data$FreqAnalysis[[1]]$HRV)
+plot_frq <- as.data.frame(rr_data$FreqAnalysis[[1]])
+
+mean_frq_domain <- as.data.frame(rr_data$FreqAnalysis[[1]]) %>%
+    mutate(HFmean = mean(HF),
+           LFmean = mean(LF),
+           LF_HFmean = mean(LFHF))
+
+mean_frq_domain <- mean_frq_domain %>%
+    select(HFmean, LFmean, LF_HFmean) %>%
+    slice(1)
+
+head(plot_frq)
+
+
+rr_data <-CalculatePowerBand(rr_data,
+                   type = "wavelet",
+                   bandtolerance = 0.01,
+                   relative = FALSE)
+
+spectrogram <- PlotSpectrogram(HRVData = rr_data,
+                               size = 600, shift = 60,
+                               scale = "logaritmic",
+                               freqRange = c(-0.4, 0.4))
+
+PlotPowerBand(rr_data, ymax = 3000, ymaxratio = 1.7)
+
+
+
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CalculatePowerBand(size = 600,shift = 30)
+
+no_shuf_HRV <- rr_data$FreqAnalysis
+no_shuf_HRV
+
+
+
+
+
 
 
 # Create function for analysing hrv using individual vector values

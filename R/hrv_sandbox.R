@@ -51,14 +51,56 @@ r_HRV
 
 cbind(vec_shuf_HRV,r_HRV)
 
-## Frequency
+## Frequency domain
+
+
+#plot HR data
 rr_data <-
     RHRV::CreateHRVData() %>%
     RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-    #RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
+    PlotNIHR(xlim = c(200,400))
+
+# plot frequency
+
+rr_frq_plot <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    CalculatePSD(indexFreqAnalysis = 1,
+                 method = "lomb", doPlot = F)
+PlotPSD(rr_frq_plot, indexFreqAnalysis = 1)
+
+
+rr_frq_plot_ar <-
+    RHRV::CreateHRVData() %>%
+    RHRV::SetVerbose(FALSE) %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    CalculateSpectrogram(size = 600,
+                         shift = 30)
+
+spectrogram <- PlotSpectrogram(HRVData = rr_frq_plot_ar,
+                               size = 600, shift = 60,
+                               scale = "logaritmic",
+                               freqRange = c(0, 0.4))
+
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
 
 
+r_HRV <- rr_data$FreqAnalysis[[1]]
+r_HRV

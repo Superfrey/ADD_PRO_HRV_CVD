@@ -8,37 +8,41 @@ names(data)[1] <- "ibi"
 
 ######################## heart rate #####################################################
 ibi <- data$ibi/1000
-ran_ibi <- sample(ibi)
+ibi <- cumsum(ibi)
+sum_sec <- sum(ibi)
+
+ran_ibi <- ran_ibi %>%
+    group_by(group) %>%
+    mutate(ibi= sample(ibi))
+ran_ibi <- (cumsum(ran_ibi$ibi))/1000
 
 
 ######################### Time domain ####################################################
 
-rr_data <-
-    RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ibi, scale = 1) %>%
-    RHRV::BuildNIHR()  %>%
-   RHRV::FilterNIHR() %>%  #consider with, when having many beats
-    RHRV::InterpolateNIHR() %>%
-    RHRV::CreateTimeAnalysis()
-no_shuf_HRV <- rr_data$TimeAnalysis
-no_shuf_HRV
+######################### Time domain ####################################################
+
+ibi <- cumsum(ibi)
 
 
 rr_data <-
     RHRV::CreateHRVData() %>%
-    RHRV::LoadBeatVector(ran_ibi, scale = 1)  %>%
+    RHRV::LoadBeatVector(ibi) %>%
     RHRV::BuildNIHR()  %>%
-    RHRV::FilterNIHR() %>%  #consider with an with when having many beats
+    # RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateTimeAnalysis()
-shuf_HRV <- rr_data$TimeAnalysis
-shuf_HRV
+no_shuf_HRV <- rr_data$TimeAnalysis[[1]]
 
 
-time_test <- cbind(shuf_HRV[[1]], no_shuf_HRV[[1]])
-time_test
-
-# Create function for analysing hrv using individual vector values
+#########################
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    # RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    RHRV::CreateTimeAnalysis()
+shuf_HRV <- rr_data$TimeAnalysis[[1]]
 
 
 ######################### Frequency domain ####################################################
@@ -51,7 +55,8 @@ rr_data <-
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
     RHRV::InterpolateNIHR() %>%
-    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CreateFreqAnalysis()
+%>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
 
 spectogram_freq <- PlotSpectrogram(rr_data, size = 600, shift = 30,
@@ -80,3 +85,52 @@ freq_test
 time_test
 
 # Create function for analysing hrv using individual vector values
+
+
+######################### Frequency domain ####################################################
+ibi <- data$ibi/1000
+sum_sec <- sum(ibi)
+ibi <- cumsum(ibi)
+
+ran_ibi <- data %>%
+    mutate(group = cumsum(ibi) %/% 30000)
+ran_ibi <- ran_ibi %>%
+    group_by(group) %>%
+    mutate(ibi= sample(ibi))
+ran_ibi <- (cumsum(ran_ibi$ibi))/1000
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    RHRV::FilterNIHR() %>%  #consider with an without
+    RHRV::InterpolateNIHR() %>%
+    #RHRV::CreateFreqAnalysis() %>%
+    #RHRV::CalculatePowerBand(size = sum_sec, shift = sum_sec, type = "fourier") %>%
+    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CalculatePSD(indexFreqAnalysis = 1,
+                                method = "lomb", doPlot = FALSE) %>%
+    RHRV::CalculateEnergyInPSDBands(indexFreqAnalysis = 1)
+
+
+no_shuf_HRV <- rr_data
+no_shuf_HRV
+
+rr_data <-
+    RHRV::CreateHRVData() %>%
+    RHRV::LoadBeatVector(ran_ibi) %>%
+    RHRV::BuildNIHR()  %>%
+    # RHRV::FilterNIHR() %>%  #consider with an without
+    #RHRV::InterpolateNIHR() %>%
+    RHRV::CreateFreqAnalysis() %>%
+    RHRV::CalculatePSD(indexFreqAnalysis = 1,
+                       method = "lomb", doPlot = F)
+
+shuf_HRV <- rr_data
+shuf_HRV
+
+filter <- cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
+filter
+
+
+###################################################################

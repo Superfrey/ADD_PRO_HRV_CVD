@@ -13,27 +13,31 @@ extract_prono <- function(paths){
 }
 
 ########################
-names(actiheart_data)
-ibi_function <- function(data) {
-    ibi_data <- data %>%
-        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds")
 
-    ibi_data <- ibi_data %>%
-        filter(timepoint >= 0)
+hr_hour <- function(data) {
 
-    ibi_data <- ibi_data %>%
-        mutate(mean_ibi = 60000/Mean_HR,
-               upper_ibi = 60000/Lower_HR,
-               lower_ibi = 60000/Upper_HR)
+data$datetime <- as.POSIXct(data$Real_Time, format = "%d-%m-%Y %H:%M:%S")
 
-    return(ibi_data)}
+data <- data %>%
+    mutate(day = lubridate::day(data$datetime),
+           week_day=lubridate::wday(data$datetime),
+           hour = as.numeric(lubridate::hour(data$datetime)),
+           day_number = as.integer(as.Date(data$datetime) - min(as.Date(data$datetime))))
 
-#sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check
-#sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
-#actiheart_data <- vroom(actiheart_file)
-#data_ibi <- ibi_function(actiheart_data)
+cut_points <- c(0,6,12,18,24)
+hour_labels <- c("00_06", "06_12", "12_18", "18_24")
+
+data <- data %>% #remove next time
+    mutate(circadian_time_points = cut(hour, breaks = cut_points, labels = hour_labels, right = FALSE))
+
+    data <- data %>%
+    select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
+           "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
+           "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds","hour","day_number", week_day,"timepoint")
+
+return(data)
+
+}
 
 
 ############################ Heart beat intervals #############
@@ -77,9 +81,11 @@ ibi_function <- function(data) {
 
     return(ibi)}
 
-ini <- ibi_function(data)
+#sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check
+#sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
+#actiheart_data <- vroom(actiheart_file)
+#data_ibi <- ibi_function(actiheart_data)
 
-ini <- ini/1000
 
 ######################## heart rate #####################################################
 

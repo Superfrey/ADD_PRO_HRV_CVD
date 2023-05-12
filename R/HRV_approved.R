@@ -75,7 +75,35 @@ ibi_function <- function(data) {
 #sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
 #actiheart_data <- vroom(actiheart_file)
 #data_ibi <- ibi_function(actiheart_data)
+########
 
+ibi_function_map <- function(data) {
+  ibi_data <- data %>%
+    select("Mean_HR", "Upper_HR", "Lower_HR", "timepoint", "Real_Time",
+           "max_ibi_1_in_milliseconds", "max_ibi_2_in_milliseconds",
+           "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds") %>%
+    filter(timepoint >= 0) %>%
+    mutate(mean_ibi = 60000/Mean_HR,
+           upper_ibi = 60000/Lower_HR,
+           lower_ibi = 60000/Upper_HR)
+
+  ibi <- map(unique(ibi_data$timepoint), ~ {
+    data_ibi <- ibi_data %>%
+      filter(timepoint == .x) %>%
+      select(mean_ibi, upper_ibi, lower_ibi)
+
+    mean <- data_ibi$mean_ibi
+    n <- round(30000/mean)
+    sd <- (data_ibi$upper_ibi - data_ibi$lower_ibi) / (2 * 1.96)
+    ibi_val <- rnorm(n, mean = mean, sd = sd)
+
+    return(ibi_val)
+  })
+
+  ibi <- unlist(ibi)
+
+  return(ibi)
+}
 
 ######################## heart rate #####################################################
 

@@ -2,8 +2,7 @@
 
 files <- list.files(here("XXXXXXXXXXXX"), pattern = "*.CSV", full.names = T)
 
-#############
-#Function for extracting ID number from file name
+############## Function for extracting ID number from file name
 extract_prono <- function(paths){
     paths %>%
         fs::path_file() %>%
@@ -12,7 +11,7 @@ extract_prono <- function(paths){
         stringr::str_remove_all("#|pro")
 }
 
-########################
+######################## Hour + day + week
 
 hr_hour <- function(data) {
 
@@ -33,7 +32,7 @@ data <- data %>% #remove next time
     data <- data %>%
     select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
            "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-           "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds","hour","day_number", week_day,"timepoint")
+           "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds","hour","day_number", week_day,"timepoint","circadian_time_points")
 
 return(data)
 

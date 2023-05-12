@@ -55,27 +55,18 @@ ibi_function <- function(data) {
                upper_ibi = 60000/Lower_HR,
                lower_ibi = 60000/Upper_HR)
 
-    ibi <- list()
-
-    timepoint <- ibi_data$timepoint
-
-    for(i in timepoint) {
-        data_ibi <- ibi_data %>%
-            filter(timepoint == i) %>%
-            select(mean_ibi,upper_ibi,lower_ibi)
-
-        mean <- data_ibi$mean_ibi
-
-        n <- round(30000/mean)
-
-        sd <- (data_ibi$upper_ibi-data_ibi$lower_ibi)/(2*1.96)
-
-        ibi_val <- rnorm(n,mean = mean,sd = sd)
-
-        ibi <- c(ibi, list(ibi_val))
-
-    }
-
+ ibi_val <- lapply(unique(ibi_data$timepoint), function(i) {
+    data_ibi <- ibi_data %>% 
+    filter(timepoint == i) 
+    %>% select(mean_ibi,upper_ibi,lower_ibi)
+    
+    mean <- data_ibi$mean_ibi
+    n <- round(30000/mean)
+    sd <- (data_ibi$upper_ibi-data_ibi$lower_ibi)/(2*1.96)
+    
+    rnorm(n, mean = mean, sd = sd)
+  })
+  
     ibi <- unlist(ibi)
 
     return(ibi)}

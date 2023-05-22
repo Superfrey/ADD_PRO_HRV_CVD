@@ -2,7 +2,7 @@
 
 files <- list.files(here("XXXXXXXXXXXX"), pattern = "*.CSV", full.names = T)
 
-############## Function for extracting ID number from file name
+############## Function for extracting ID number from file name in ADDITION PRO data set
 extract_prono <- function(paths){
     paths %>%
         fs::path_file() %>%
@@ -11,7 +11,7 @@ extract_prono <- function(paths){
         stringr::str_remove_all("#|pro")
 }
 
-######################## Hour + day + week
+######################## Hour + day + week extraction of time dimension
 
 hr_hour <- function(data) {
 
@@ -39,7 +39,7 @@ return(data)
 }
 
 
-############################ Heart beat intervals #############
+############################ Heart beat intervals (inter-beat-intervals) #############
 
 ibi_function <- function(data) {
     ibi_data <- data %>%

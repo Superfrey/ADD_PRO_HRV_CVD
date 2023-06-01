@@ -104,3 +104,9 @@ rr_data <-
 
 r_HRV <- rr_data$FreqAnalysis[[1]]
 r_HRV
+
+
+ran_ibi %>%
+   filter(group == 6) %>%
+   ggplot(aes(sample(ibi))) +
+   geom_histogram()

@@ -32,11 +32,31 @@ Inclusion criteria for the participants was having a least 48 hour measured hear
 
 Frequencies (percentages) and medians (lower and upper quartiles) will be calculated to describe categorical and continuous variables, respectively. These descriptive statistics will be presented in the table. Table 1 gives an overview of the study population general characteristics (demographic, lifestyle, bio markers). Prevalence and incidence rate of cardiovascular events (myocardial infarction, stroke, and heart failure), will be shown in table 2. Flow of participation will be shown in figure 1.
 
-We will use cox proportional hazard model to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The hazard ratio by increase in HRV from the cox models will be presented in table 3. Because of biological differences in sex in the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
+#### Calculation of HRV time-domain indices
+
+Based on actiheart, we had measures of heart rate traces for up to 7 days. Mean heart rate with prediction interval were obtained every 30-second epoch. Minimum and maximum as well as 2nd lowest minimum and 2nd highest maximum inter-beat-interval where measured from the latest 16 heartbeat in each 60-second epoch.
+
+We did have access to time-series of successive IBI, in the period of measurement. Therefore, we generated IBIs in time-spand of every 30-second interval based on 30-second epoch of mean heart rate and prediction intervals. As earlier data from studies have shown that IBI are normally distributed per 30-second epoch, we generated IBI 30-second distribution by using mean heart rate and its standard deviation. In order to calculate SD from prediction intervals, we assured that the prediction intervals symmetric differed from the mean by calculating the difference between the upper and lower prediction interval from the mean heart rate and visually observing the symmetry over time. As we did not have successive time-series measurement, we can only use HRV indices that is based on distribution of RR intervals. Therefore, frequency domain measures were not included in the study. We included HRV indices standard deviation between normal to normal heart beat intervals.... Additionally, by taking the mean of the difference between 2nd highest and 2nd lowest inter-beat-interval for each 60-second epoch, we estimated the HRV index, IBI difference, a measurement (use Søren Brage paper description). All HRV indices where calculate by week, day, hour per day, and circadian block per day (00:00-06:00, 06:00-12:00, 12:00-18:00, 18:00-00:00).
+
+Furthermore, mean heart rate and resting heart rate was included. Resting heart rate was determined by ?the lowest heart for a time period, in th resting stage in supine position. this was cross-checked by accelerometry data?
+
+#### Statistical analysis
+
+In the statistical analysis, we would like to use two approaches. One traditional statistical investigating the association between HRV. In both approaches, we want to examine the temporal changes in HR and HRV from the circadian rhythm.
+
+**Traditional statistical approach**
+
+We will use poisson regression models to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as all-cause mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The incidence rate ratio by increase in HRV from the possion models will be presented in table 3. Because of biological differences in sex in the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
 
 To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 2.
 
-Both with multiple imputation and complete case analyses will be conducted in the R statistical computing environment (version X). 
+Both with multiple imputation and complete case analyses will be conducted in the R statistical computing environment (version X).
+
+Additional suggestion to account for: actiheart was performed in different season, hence it might by interesting to account or examine seasonal variations. Multi-stage from prediabetes and HRV measurement to T2D to CVD risk, compared to prediabetes and HRV to CVD risk.
+
+**Advanced machine learning approach**
+
+Use all available data as detailed as possible to look into predicting CVD events. These models can include Random Forrest, Baysian Additive Regression Trees (BART) for simple data, and neural network for more complicated models using time-series data.
 
 \newpage
 
@@ -85,21 +105,9 @@ List of variables
 |                                                           |   |
 | -   Standard deviation of Normal to Normal intervals (ms) |   |
 |                                                           |   |
-| -   Root mean squared of successive RR intervals (ms)     |   |
-|                                                           |   |
-| -   pNN50 (ms)                                            |   |
+| -   SDANN                                                 |   |
 |                                                           |   |
 | -   SDSD (ms)                                             |   |
-|                                                           |   |
-| -   High frequency (ms^2^)                                |   |
-|                                                           |   |
-| -   Low frequency (ms^2^)                                 |   |
-|                                                           |   |
-| -   LF / HF ratio                                         |   |
-|                                                           |   |
-| -   Ultra low frequency (ms^2^)                           |   |
-|                                                           |   |
-| -   Ultra high frequency (ms^2^)                          |   |
 +-----------------------------------------------------------+---+
 | Medication use?                                           |   |
 |                                                           |   |
@@ -108,6 +116,8 @@ List of variables
 | -   Cardioprotective medication                           |   |
 |                                                           |   |
 |     -   antihypentensive                                  |   |
+|                                                           |   |
+|         -   types of antihypertensive                     |   |
 |                                                           |   |
 |     -   lipid lowering                                    |   |
 +-----------------------------------------------------------+---+
@@ -118,6 +128,8 @@ List of variables
 | Stroke                                                    |   |
 +-----------------------------------------------------------+---+
 | Heart failure                                             |   |
++-----------------------------------------------------------+---+
+| All-cause mortality                                       |   |
 +-----------------------------------------------------------+---+
 
 **Table 1** Population characteristics by diabetes status
@@ -142,14 +154,14 @@ List of variables
 | Mean heart rate (bpm)                                 |                                  |
 | Median heart rate (bpm)                               |                                  |
 | Standard deviation of Normal to Normal intervals (ms) |                                  |
-| Root mean squared of successive RR intervals (ms)     |                                  |
-| pNN50 (ms)                                            |                                  |
+| Root mean squared of successive RR intervals (ms)     | *Not possible*                   |
+| pNN50 (ms)                                            | *Not possible*                   |
 | SDSD (ms)                                             |                                  |
-| High frequency (ms^2^)                                |                                  |
-| Low frequency (ms^2^)                                 |                                  |
-| Low frequency / high frequency (ratio)                |                                  |
-| Ultra low frequency (ms^2^)                           |                                  |
-| Ultra high frequency (ms^2^)                          |                                  |
+| High frequency (ms^2^)                                | *Not possible*                   |
+| Low frequency (ms^2^)                                 | *Not possible*                   |
+| Low frequency / high frequency (ratio)                | *Not possible*                   |
+| Ultra low frequency (ms^2^)                           | *Not possible*                   |
+| Ultra high frequency (ms^2^)                          | *Not possible*                   |
 
 **Table 2** CVD and mortality incident in study population
 
@@ -162,15 +174,15 @@ List of variables
 
 **Table 3** Heart rate variability indices associated with CVD
 
-|                           | **Model 1: HR (95% CI)** |                     | **Model 2: HR (95% CI)** |                     |
-|---------------------------|--------------------------|---------------------|--------------------------|---------------------|
-|                           | CVD events               | All cause mortality | CVD events               | All cause mortality |
-|                           | n=x                      |                     | n=x                      |                     |
-| SDNN (per unit)           | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
-| RMSSD (per unit)          | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx=  |
-| High frequency (per unit) | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
-| Low frequency (per unit)  | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)       | 0.xx (0.xx - 1.xx)  |
-| mean HR (per unit)        | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 0.xx)       | 0.xx (0.xx - 0.xx)  |
+|                    | **Model 1: IRR (95% CI)** |                     | **Model 2: IRR (95% CI)** |                     |
+|--------------------|---------------------------|---------------------|---------------------------|---------------------|
+|                    | CVD events                | All cause mortality | CVD events                | All cause mortality |
+|                    | n=x                       |                     | n=x                       |                     |
+| SDNN (per unit)    | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)        | 0.xx (0.xx - 1.xx)  |
+|                    |                           |                     |                           |                     |
+|                    |                           |                     |                           |                     |
+|                    |                           |                     |                           |                     |
+| mean HR (per unit) | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  |
 
 \newpage
 
@@ -202,5 +214,5 @@ ggplot(data.frame(heart_rate_variability, hrv_haz), aes(x = heart_rate_variabili
   scale_y_continuous(limits = c(0.0, 1.5), breaks = seq(0.5, 1.5, by = 0.25)) +
   theme_classic() +
   xlab("Heart rate variability") +
-  ylab("Hazard ratio")
+  ylab("IRR")
 ```

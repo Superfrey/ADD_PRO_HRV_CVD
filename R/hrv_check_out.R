@@ -55,8 +55,7 @@ rr_data <-
     RHRV::BuildNIHR()  %>%
     #RHRV::FilterNIHR() %>%  #consider with an without FIND OUT WHAT THIS ARE DOING! _Including make diff results...
     RHRV::InterpolateNIHR() %>%
-    RHRV::CreateFreqAnalysis()
-%>%
+    RHRV::CreateFreqAnalysis()%>%
     RHRV::CalculatePowerBand(size = 600,shift = 30)
 
 spectogram_freq <- PlotSpectrogram(rr_data, size = 600, shift = 30,

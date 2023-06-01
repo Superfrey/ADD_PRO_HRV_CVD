@@ -131,11 +131,14 @@ rr_data <-
     RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
-    RHRV::CalculatePowerBand(size = sum_sec, shift = sum_sec, indexFreqAnalysis = 1, type = "fourier")
-
+    RHRV::CalculatePowerBand(type = "wavelet",
+                             bandtolerance = 0.01,
+                             relative = FALSE)
 
 no_shuf_HRV <- rr_data$FreqAnalysis
 no_shuf_HRV
+LF_ran <- mean(no_shuf_HRV[[1]]$LF)
+
 
 rr_data <-
     RHRV::CreateHRVData() %>%
@@ -144,10 +147,11 @@ rr_data <-
     RHRV::FilterNIHR() %>%  #consider with an without
     RHRV::InterpolateNIHR() %>%
     RHRV::CreateFreqAnalysis() %>%
-    RHRV::CalculatePowerBand(size = sum_sec, shift = sum_sec, indexFreqAnalysis = 1,  type = "fourier")
+    RHRV::CalculatePowerBand(size = 600, shift = 30, type = "wavelet")
 
+rr_data_shuf <- rr_data
 shuf_HRV <- rr_data$FreqAnalysis
-shuf_HRV
+LF_non <- mean(shuf_HRV[[1]]$LF)
 
 filter <- cbind(shuf_HRV[[1]],no_shuf_HRV[[1]])
 filter

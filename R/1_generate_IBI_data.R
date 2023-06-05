@@ -6,7 +6,7 @@ actiheart_time_day <- function(data) {
   hour_labels <- c("00_06", "06_12", "12_18", "18_24")
 
   data <- data %>%
-    mutate(
+    dplyr::mutate(
       datetime = lubridate::as_datetime(Real_Time),
       day = lubridate::day(datetime),
       week_day = lubridate::wday(datetime),
@@ -21,35 +21,32 @@ actiheart_time_day <- function(data) {
 ###########
 ibi_function <- function(data) {
   data <- data %>%
-    filter(
+    dplyr::filter(
       timepoint >= 0,
-      Mean_HR < 250,
-      Upper_HR < 250,
-      Lower_HR < 250,
-      Mean_HR > 25,
-      Upper_HR > 25,
-      Lower_HR > 25
+      dplyr::between(Mean_HR, 250, 25),
+      dplyr::between(Upper_HR, 250, 25),
+      dplyr::between(Lower_HR, 250, 25)
     ) %>%
-    mutate(
+    dplyr::mutate(
       mean_ibi = 60000 / Mean_HR,
       upper_ibi = 60000 / Lower_HR,
       lower_ibi = 60000 / Upper_HR
     )
   ibi <- data %>%
-    group_split(timepoint) %>%
-    map_dfr(~ {
+    dplyr::group_split(timepoint) %>%
+    purrr::map_dfr(~ {
         mean <- .x$mean_ibi
         n <- round(30000/mean)
         sd <- (.x$upper_ibi-.x$lower_ibi)/(2*1.96)
 
-        tibble(
+        tibble::tibble(
           timepoint = .x$timepoint
-          ibi = rnorm(n, mean = mean, sd = sd)
+          ibi = stats::rnorm(n, mean = mean, sd = sd)
         )
     })
 
   ibi_data <- data %>%
-    full_join(ibi)
+    dplyr::full_join(ibi)
 
     return(ibi_data)
 }

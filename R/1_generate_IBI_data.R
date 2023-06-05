@@ -20,21 +20,21 @@ actiheart_time_day <- function(data) {
 
 ###########
 ibi_function <- function(data) {
-
-    ibi_data <- data %>%
-        filter(timepoint >= 0,
-               Mean_HR < 250,
-               Upper_HR < 250,
-               Lower_HR < 250,
-               Mean_HR > 25,
-               Upper_HR > 25,
-               Lower_HR > 25
-               )
-
-    ibi_data <- ibi_data %>%
-        mutate(mean_ibi = 60000/Mean_HR,
-               upper_ibi = 60000/Lower_HR,
-               lower_ibi = 60000/Upper_HR)
+  ibi_data <- data %>%
+    filter(
+      timepoint >= 0,
+      Mean_HR < 250,
+      Upper_HR < 250,
+      Lower_HR < 250,
+      Mean_HR > 25,
+      Upper_HR > 25,
+      Lower_HR > 25
+    ) %>%
+    mutate(
+      mean_ibi = 60000 / Mean_HR,
+      upper_ibi = 60000 / Lower_HR,
+      lower_ibi = 60000 / Upper_HR
+    )
 
     ibi <- lapply(unique(ibi_data$timepoint), function(i) {
 

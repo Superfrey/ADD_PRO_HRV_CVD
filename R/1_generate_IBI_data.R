@@ -36,7 +36,7 @@ ibi_function <- function(data) {
       lower_ibi = 60000 / Upper_HR
     ) %>%
     group_split(timepoint) %>%
-    map(~ {
+    map_dfr(~ {
         mean <- .x$mean_ibi
         n <- round(30000/mean)
         sd <- (.x$upper_ibi-.x$lower_ibi)/(2*1.96)
@@ -46,8 +46,6 @@ ibi_function <- function(data) {
           ibi = rnorm(n, mean = mean, sd = sd)
         )
     })
-
-    ibi <- do.call(rbind,ibi)
 
     return(ibi)}
 

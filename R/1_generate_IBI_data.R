@@ -41,11 +41,10 @@ ibi_function <- function(data) {
         n <- round(30000/mean)
         sd <- (.x$upper_ibi-.x$lower_ibi)/(2*1.96)
 
-        ibi_val <- rnorm(n, mean = mean, sd = sd)
-
-        tibble(ibi = ibi_val, day_number = .x$day_number[1:length(n)] , hour = .x$hour[1:length(n)],
-               week_day = .x$week_day[1:length(n)], circadian_time_points = .x$circadian_time_points[1:length(n)],
-               real_time = .x$Real_Time[1:length(n)], timepoint = i)
+        tibble(
+          timepoint = .x$timepoint
+          ibi = rnorm(n, mean = mean, sd = sd)
+        )
     })
 
     ibi <- do.call(rbind,ibi)

@@ -1,20 +1,15 @@
-TODO: Add more to the title of your project here
+# ADD_PRO_HRV_CVD: Long-term weekly heart rate variability association with cardiovascular disease in prediabetes -- a prospective cohort-study from the ADDITION-PRO
 
-# ADD_PRO_HRV_CVD:
-
-TODO: Give a brief description of what your project is about
-
-This project...
+This project aims examine the association between HRV and CVD risk in those who have prediabetes.
 
 # Brief description of folder and file contents
 
-TODO: As project evolves, add brief description of what is inside the data, doc and R folders.
-
 The following folders contain:
 
-- `data/`:
-- `doc/`:
-- `R/`:
+- `data/`: Will contain the results from analyses.
+- `data-raw/`: Contains the fake data to use to test out the code on.
+- `doc/`: Contains the paper of the analysis.
+- `R/`: Contains R code used for analysis. 
 
 # Installing project R package dependencies
 
@@ -22,13 +17,7 @@ If dependencies have been managed by using `usethis::use_package("packagename")`
 through the `DESCRIPTION` file, installing dependencies is as easy as opening the
 `ADD_PRO_HRV_CVD.Rproj` file and running this command in the console:
 
-    # install.packages("remotes")
-    remotes::install_deps()
+    # install.packages("pak")
+    pak::pak()
 
-You'll need to have remotes installed for this to work.
-
-# Resource
-
-For more information on this folder and file workflow and setup, check
-out the [prodigenr](https://rostools.github.io/prodigenr) online
-documentation.
+You'll need to have the pak package installed for this to work.

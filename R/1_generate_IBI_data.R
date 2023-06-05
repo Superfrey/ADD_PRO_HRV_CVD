@@ -22,12 +22,6 @@ actiheart_time_day <- function(data) {
 ibi_function <- function(data) {
 
     ibi_data <- data %>%
-        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds",
-               "hour","day_number", "week_day","timepoint","circadian_time_points")
-
-    ibi_data <- ibi_data %>%
         filter(timepoint >= 0,
                Mean_HR < 250,
                Upper_HR < 250,

@@ -57,10 +57,7 @@ ibi_function <- function(data) {
 
 ## IBI diff data
 ibi_diff_data <- function(ibi_data) {
-  data <- actiheart_time_day(ibi_data)
-
-
-  ibi_data <- data %>%
+  ibi_data <- ibi_data %>%
     select(
       "Mean_HR", "Upper_HR", "Lower_HR", "timepoint", "Real_Time",
       "max_ibi_1_in_milliseconds", "max_ibi_2_in_milliseconds",

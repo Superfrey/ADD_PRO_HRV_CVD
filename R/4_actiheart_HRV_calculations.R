@@ -34,7 +34,9 @@ extract_prono <- function(paths){
           actiheart_time_day() %>%
           ibi_function()
 
-        ibi_diff <- ibi_diff_data(data)
+        ibi_diff <- data %>%
+          actiheart_time_day() %>%
+          ibi_diff_data()
 
         # week HRV
         ibi_diff_week <- acti_ibi_diff_week(ibi_diff)

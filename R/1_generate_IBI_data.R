@@ -2,13 +2,13 @@
 
 actiheart_time_day <- function(data) {
   data <- data %>%
-    mutate(datetime = lubridate::as_datetime(Real_Time))
-
-    data <- data %>%
-        mutate(day = lubridate::day(data$datetime),
-               week_day=lubridate::wday(data$datetime),
-               hour = as.numeric(lubridate::hour(data$datetime)),
-               day_number = as.integer(as.Date(data$datetime) - min(as.Date(data$datetime))))
+    mutate(
+      datetime = lubridate::as_datetime(Real_Time),
+      day = lubridate::day(data$datetime),
+      week_day = lubridate::wday(data$datetime),
+      hour = as.numeric(lubridate::hour(data$datetime)),
+      day_number = as.integer(as.Date(data$datetime) - min(as.Date(data$datetime)))
+    )
 
     cut_points <- c(0,6,12,18,24)
     hour_labels <- c("00_06", "06_12", "12_18", "18_24")

@@ -15,14 +15,7 @@ actiheart_time_day <- function(data) {
       circadian_time_points = cut(hour, breaks = cut_points, labels = hour_labels, right = FALSE)
     )
 
-    data <- data %>%
-        select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-               "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-               "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds",
-               "hour","day_number", "week_day","timepoint","circadian_time_points")
-
     return(data)
-
 }
 
 ###########

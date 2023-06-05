@@ -1,8 +1,8 @@
 ############# Generate date, day, hour
 
 actiheart_time_day <- function(data) {
-
-    data$datetime <- as.POSIXct(data$Real_Time, format = "%d-%m-%Y %H:%M:%S")
+  data <- data %>%
+    mutate(datetime = lubridate::as_datetime(Real_Time))
 
     data <- data %>%
         mutate(day = lubridate::day(data$datetime),

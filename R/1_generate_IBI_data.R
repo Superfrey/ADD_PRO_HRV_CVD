@@ -1,6 +1,6 @@
 ############# Generate date, day, hour
 
-actiheart_time_day <- function(data) {
+create_time_day_variables <- function(data) {
   cut_points <- c(0, 6, 12, 18, 24)
   hour_labels <- c("00_06", "06_12", "12_18", "18_24")
 
@@ -18,7 +18,7 @@ actiheart_time_day <- function(data) {
 }
 
 ###########
-ibi_function <- function(data) {
+calculate_ibi <- function(data) {
   data <- data %>%
     dplyr::filter(
       timepoint >= 0,
@@ -56,7 +56,7 @@ ibi_function <- function(data) {
 
 
 ## IBI diff data
-ibi_diff_data <- function(ibi_data) {
+calculate_ibi_diff <- function(ibi_data) {
   ibi_diff <- ibi_data %>%
     filter(
       timepoint >= 0,

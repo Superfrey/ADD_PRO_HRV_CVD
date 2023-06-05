@@ -1,20 +1,19 @@
 ############# Generate date, day, hour
 
 actiheart_time_day <- function(data) {
+
+  cut_points <- c(0, 6, 12, 18, 24)
+  hour_labels <- c("00_06", "06_12", "12_18", "18_24")
+
   data <- data %>%
     mutate(
       datetime = lubridate::as_datetime(Real_Time),
       day = lubridate::day(datetime),
       week_day = lubridate::wday(datetime),
       hour = as.numeric(lubridate::hour(datetime)),
-      day_number = as.integer(as.Date(datetime) - min(as.Date(datetime)))
+      day_number = as.integer(as.Date(datetime) - min(as.Date(datetime))),
+      circadian_time_points = cut(hour, breaks = cut_points, labels = hour_labels, right = FALSE)
     )
-
-    cut_points <- c(0,6,12,18,24)
-    hour_labels <- c("00_06", "06_12", "12_18", "18_24")
-
-    data <- data %>% #remove next time
-        mutate(circadian_time_points = cut(hour, breaks = cut_points, labels = hour_labels, right = FALSE))
 
     data <- data %>%
         select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",

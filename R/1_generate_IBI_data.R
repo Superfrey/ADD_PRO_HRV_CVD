@@ -57,24 +57,17 @@ ibi_function <- function(data) {
 
 ## IBI diff data
 ibi_diff_data <- function(ibi_data) {
-  ibi_data <- ibi_data %>%
-    select(
-      "Mean_HR", "Upper_HR", "Lower_HR", "timepoint", "Real_Time",
-      "max_ibi_1_in_milliseconds", "max_ibi_2_in_milliseconds",
-      "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds",
-      "hour", "day_number", "week_day", "timepoint", "circadian_time_points"
-    )
-
-  ibi_data <- ibi_data %>%
+  ibi_diff <- ibi_data %>%
     filter(
-      timepoint >= 0, is.na(max_ibi_2_in_milliseconds) == FALSE, is.na(min_ibi_2_in_milliseconds) == FALSE,
-      min_ibi_2_in_milliseconds > 300, min_ibi_2_in_milliseconds < 1500,
-      max_ibi_2_in_milliseconds < 1500, max_ibi_2_in_milliseconds > 300
-    )
-
-
-  ibi_diff_data <- ibi_data %>%
+      timepoint >= 0,
+      is.na(max_ibi_2_in_milliseconds) == FALSE,
+      is.na(min_ibi_2_in_milliseconds) == FALSE,
+      min_ibi_2_in_milliseconds > 300,
+      min_ibi_2_in_milliseconds < 1500,
+      max_ibi_2_in_milliseconds < 1500,
+      max_ibi_2_in_milliseconds > 300
+    ) %>%
     mutate(ibi_diff = max_ibi_2_in_milliseconds - min_ibi_2_in_milliseconds)
 
-  return(ibi_diff_data)
+  return(ibi_diff)
 }

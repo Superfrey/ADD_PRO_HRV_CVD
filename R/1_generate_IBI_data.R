@@ -20,7 +20,7 @@ actiheart_time_day <- function(data) {
 
 ###########
 ibi_function <- function(data) {
-  ibi_data <- data %>%
+  ibi <- data %>%
     filter(
       timepoint >= 0,
       Mean_HR < 250,
@@ -34,25 +34,18 @@ ibi_function <- function(data) {
       mean_ibi = 60000 / Mean_HR,
       upper_ibi = 60000 / Lower_HR,
       lower_ibi = 60000 / Upper_HR
-    )
-
-    ibi <- lapply(unique(ibi_data$timepoint), function(i) {
-
-        data_ibi <- ibi_data %>%
-            filter(timepoint == i)  %>%
-            select("mean_ibi","upper_ibi","lower_ibi","Real_Time",
-                   "hour","day_number", "week_day","timepoint",
-                   "circadian_time_points")
-
-        mean <- data_ibi$mean_ibi
+    ) %>%
+    group_split(timepoint) %>%
+    map(~ {
+        mean <- .x$mean_ibi
         n <- round(30000/mean)
-        sd <- (data_ibi$upper_ibi-data_ibi$lower_ibi)/(2*1.96)
+        sd <- (.x$upper_ibi-.x$lower_ibi)/(2*1.96)
 
         ibi_val <- rnorm(n, mean = mean, sd = sd)
 
-        tibble(ibi = ibi_val, day_number = data_ibi$day_number[1:length(n)] , hour = data_ibi$hour[1:length(n)],
-               week_day = data_ibi$week_day[1:length(n)], circadian_time_points = data_ibi$circadian_time_points[1:length(n)],
-               real_time = data_ibi$Real_Time[1:length(n)], timepoint = i)
+        tibble(ibi = ibi_val, day_number = .x$day_number[1:length(n)] , hour = .x$hour[1:length(n)],
+               week_day = .x$week_day[1:length(n)], circadian_time_points = .x$circadian_time_points[1:length(n)],
+               real_time = .x$Real_Time[1:length(n)], timepoint = i)
     })
 
     ibi <- do.call(rbind,ibi)

@@ -1,7 +1,6 @@
 ############# Generate date, day, hour
 
 actiheart_time_day <- function(data) {
-
   cut_points <- c(0, 6, 12, 18, 24)
   hour_labels <- c("00_06", "06_12", "12_18", "18_24")
 
@@ -15,7 +14,7 @@ actiheart_time_day <- function(data) {
       circadian_time_points = cut(hour, breaks = cut_points, labels = hour_labels, right = FALSE)
     )
 
-    return(data)
+  return(data)
 }
 
 ###########
@@ -35,48 +34,50 @@ ibi_function <- function(data) {
   ibi <- data %>%
     dplyr::group_split(timepoint) %>%
     purrr::map_dfr(~ {
-        mean <- .x$mean_ibi
-        n <- round(30000/mean)
-        sd <- (.x$upper_ibi-.x$lower_ibi)/(2*1.96)
+      mean <- .x$mean_ibi
+      n <- round(30000 / mean)
+      sd <- (.x$upper_ibi - .x$lower_ibi) / (2 * 1.96)
 
-        tibble::tibble(
-          timepoint = .x$timepoint
-          ibi = stats::rnorm(n, mean = mean, sd = sd)
-        )
+      tibble::tibble(
+        timepoint = .x$timepoint,
+        ibi = stats::rnorm(n, mean = mean, sd = sd)
+      )
     })
 
   ibi_data <- data %>%
     dplyr::full_join(ibi)
 
-    return(ibi_data)
+  return(ibi_data)
 }
 
 
-#sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check
-#sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
+# sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check
+# sym_up <-  data_ibi$upper_ibi - data_ibi$mean_ibi
 
 
 ## IBI diff data
-ibi_diff_data <-  function(ibi_data) {
-
-data <- actiheart_time_day(ibi_data)
-
-
-ibi_data <- data %>%
-    select("Mean_HR", "Upper_HR", "Lower_HR","timepoint", "Real_Time",
-           "max_ibi_1_in_milliseconds","max_ibi_2_in_milliseconds",
-           "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds",
-           "hour","day_number", "week_day","timepoint","circadian_time_points")
-
-ibi_data <- ibi_data %>%
-    filter(timepoint >= 0, is.na(max_ibi_2_in_milliseconds)== FALSE, is.na(min_ibi_2_in_milliseconds)== FALSE,
-           min_ibi_2_in_milliseconds > 300, min_ibi_2_in_milliseconds < 1500,
-           max_ibi_2_in_milliseconds < 1500, max_ibi_2_in_milliseconds > 300 )
+ibi_diff_data <- function(ibi_data) {
+  data <- actiheart_time_day(ibi_data)
 
 
-ibi_diff_data <- ibi_data %>%
+  ibi_data <- data %>%
+    select(
+      "Mean_HR", "Upper_HR", "Lower_HR", "timepoint", "Real_Time",
+      "max_ibi_1_in_milliseconds", "max_ibi_2_in_milliseconds",
+      "min_ibi_1_in_milliseconds", "min_ibi_2_in_milliseconds",
+      "hour", "day_number", "week_day", "timepoint", "circadian_time_points"
+    )
+
+  ibi_data <- ibi_data %>%
+    filter(
+      timepoint >= 0, is.na(max_ibi_2_in_milliseconds) == FALSE, is.na(min_ibi_2_in_milliseconds) == FALSE,
+      min_ibi_2_in_milliseconds > 300, min_ibi_2_in_milliseconds < 1500,
+      max_ibi_2_in_milliseconds < 1500, max_ibi_2_in_milliseconds > 300
+    )
+
+
+  ibi_diff_data <- ibi_data %>%
     mutate(ibi_diff = max_ibi_2_in_milliseconds - min_ibi_2_in_milliseconds)
 
-return(ibi_diff_data)
-
+  return(ibi_diff_data)
 }

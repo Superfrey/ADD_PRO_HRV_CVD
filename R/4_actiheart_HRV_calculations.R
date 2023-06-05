@@ -30,7 +30,9 @@ extract_prono <- function(paths){
         ibi_hour <- data  %>%
             mutate(time_hour = as.numeric(nrow(data))/2/60)
 
-        ibi <-  ibi_function(data)
+        ibi <-  data %>%
+          actiheart_time_day() %>%
+          ibi_function()
 
         ibi_diff <- ibi_diff_data(data)
 

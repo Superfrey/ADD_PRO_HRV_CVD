@@ -2,6 +2,17 @@ Package: ADD_PRO_HRV_CVD
 Type: Project
 Version: 0.0.1
 Imports:
+    fs,
+    ggplot2,
+    here,
     knitr,
-    rmarkdown
+    lubridate,
+    remotes,
+    RHRV,
+    rmarkdown,
+    stringr,
+    usethis,
+    vroom
 Encoding: UTF-8
+Depends: 
+    tidyverse

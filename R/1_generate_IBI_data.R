@@ -20,7 +20,7 @@ actiheart_time_day <- function(data) {
 
 ###########
 ibi_function <- function(data) {
-  ibi <- data %>%
+  data <- data %>%
     filter(
       timepoint >= 0,
       Mean_HR < 250,
@@ -34,7 +34,8 @@ ibi_function <- function(data) {
       mean_ibi = 60000 / Mean_HR,
       upper_ibi = 60000 / Lower_HR,
       lower_ibi = 60000 / Upper_HR
-    ) %>%
+    )
+  ibi <- data %>%
     group_split(timepoint) %>%
     map_dfr(~ {
         mean <- .x$mean_ibi
@@ -47,7 +48,11 @@ ibi_function <- function(data) {
         )
     })
 
-    return(ibi)}
+  ibi_data <- data %>%
+    full_join(ibi)
+
+    return(ibi_data)
+}
 
 
 #sym_low <- data_ibi$mean_ibi - data_ibi$lower_ibi #symmatry check

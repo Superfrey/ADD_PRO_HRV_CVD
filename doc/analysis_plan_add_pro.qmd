@@ -36,9 +36,9 @@ Frequencies (percentages) and medians (lower and upper quartiles) will be calcul
 
 Based on actiheart, we had measures of heart rate traces for up to 7 days. Mean heart rate with prediction interval were obtained every 30-second epoch. Minimum and maximum as well as 2nd lowest minimum and 2nd highest maximum inter-beat-interval where measured from the latest 16 heartbeat in each 60-second epoch.
 
-We did have access to time-series of successive IBI, in the period of measurement. Therefore, we generated IBIs in time-spand of every 30-second interval based on 30-second epoch of mean heart rate and prediction intervals. As earlier data from studies have shown that IBI are normally distributed per 30-second epoch, we generated IBI 30-second distribution by using mean heart rate and its standard deviation. In order to calculate SD from prediction intervals, we assured that the prediction intervals symmetric differed from the mean by calculating the difference between the upper and lower prediction interval from the mean heart rate and visually observing the symmetry over time. As we did not have successive time-series measurement, we can only use HRV indices that is based on distribution of RR intervals. Therefore, frequency domain measures were not included in the study. We included HRV indices standard deviation between normal to normal heart beat intervals.... Additionally, by taking the mean of the difference between 2nd highest and 2nd lowest inter-beat-interval for each 60-second epoch, we estimated the HRV index, IBI difference, a measurement (use Søren Brage paper description). All HRV indices where calculate by week, day, hour per day, and circadian block per day (00:00-06:00, 06:00-12:00, 12:00-18:00, 18:00-00:00).
+We did not have access to time-series of successive IBI, in the period of measurement. Therefore, we generated IBIs in time-spand of every 30-second interval based on 30-second epoch of mean heart rate and prediction intervals. As earlier data from studies have shown that IBI are normally distributed per 30-second epoch, we generated IBI 30-second distribution by using mean heart rate and its standard deviation. In order to calculate SD from prediction intervals, we assured that the prediction intervals symmetric differed from the mean by calculating the difference between the upper and lower prediction interval from the mean heart rate and visually observing their symmetry over time. Using RHRV package in R, we calculated HRV indices. As we did not have successive time-series measurement, we can only use HRV indices that is based on distribution of RR intervals. Therefore, frequency domain measures were not included in the study. We included HRV indices standard deviation between normal to normal heart beat intervals (SDNN), standard Deviation of the 5 minute Average NN intervals (SDANN), SDNN index (SDNNi), HRV triangular index, triangular interpolation of NN interval histogram (TINN). Additionally, by taking the mean of the difference between 2nd highest and 2nd lowest inter-beat-interval for each 60-second epoch, we estimated the HRV index, IBI difference, a measurement (use Søren Brage paper description). All HRV indices where calculate by week, day, hour per day, and circadian block per day (00:00-06:00, 06:00-12:00, 12:00-18:00, 18:00-00:00).
 
-Furthermore, mean heart rate and resting heart rate was included. Resting heart rate was determined by ?the lowest heart for a time period, in th resting stage in supine position. this was cross-checked by accelerometry data?
+Furthermore, mean heart rate and resting heart rate was included. Resting heart rate was determined by ?the lowest heart for a time period, in the resting stage in supine position. this was cross-checked by accelerometry data?
 
 #### Statistical analysis
 
@@ -46,17 +46,23 @@ In the statistical analysis, we would like to use two approaches. One traditiona
 
 **Traditional statistical approach**
 
-We will use poisson regression models to investigate the association between heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as all-cause mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c. The incidence rate ratio by increase in HRV from the possion models will be presented in table 3. Because of biological differences in sex in the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
+We will investigate two aims in our analysis: 1) Determine the association between week-long HRV and CVD; 2) Determine the diurnal variation in hourly HRV association to future CVD.
 
-To investigate for non-linearity (splines), we included defined knots based on quartiles in HRV distribution. The results from the spline models will by visualized in figure 2.
+For the first objective, we will use poisson regression models to investigate the association between week long heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as all-cause mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c, and Model 3 with further adjustments of anti-hypertensive, and glucose-lowering medication. The incidence rate by increase in HRV from the poisson models will be presented in table 3. Because of biological differences in sex with regard to the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
+
+To investigate for non-linearity (splines), we included defined knots based on percentiles in HRV distribution. The results from the spline models will by visualized in figure 2.
+
+We will perform similar analysis for each hour of HRV in a day. Point incidence estimates with 95% confidence interval will be plotted by each hour (see figure 3). For this analysis, we will not include knot for HRV analysis.
 
 Both with multiple imputation and complete case analyses will be conducted in the R statistical computing environment (version X).
 
-Additional suggestion to account for: actiheart was performed in different season, hence it might by interesting to account or examine seasonal variations. Multi-stage from prediabetes and HRV measurement to T2D to CVD risk, compared to prediabetes and HRV to CVD risk.
+*Exploratory ideas*
 
-**Advanced machine learning approach**
+*Additional suggestion to account for: actiheart was performed in different season, hence it might by interesting to account or examine seasonal variations. Multi-stage from prediabetes and HRV measurement to T2D to CVD risk, compared to prediabetes and HRV to CVD risk. Multi-stage to different types of anti-hypertensive medication (ace-inhibitors, beta blockers, diuretics), and to CVD.*
 
-Use all available data as detailed as possible to look into predicting CVD events. These models can include Random Forrest, Baysian Additive Regression Trees (BART) for simple data, and neural network for more complicated models using time-series data.
+**Machine learning approach**
+
+Use all available data as detailed as possible to look into predicting CVD events. These models can include Random Forrest, Bayesian Additive Regression Trees (BART) for simple data, and neural network for more complicated models using time-series data. Using neural network, we will train time-series data from actiheart unsupervised and then upload the model to DST to test is performance in detecting high risk CVD individuals.
 
 \newpage
 
@@ -259,4 +265,33 @@ ggplot(data.frame(heart_rate_variability, hrv_haz), aes(x = heart_rate_variabili
   theme_classic() +
   xlab("Heart rate variability") +
   ylab("IRR")
+```
+
+Figure 3 **(example)**
+
+```{r}
+#| echo: false
+#| warning: false
+#| 
+# Sample data (replace this with your actual data)
+hour <- 1:24
+point_estimate <- c(0.8, 0.6, 0.5, 0.4, 0.3, 0.2, 0.4, 0.7, 1.0, 1.2, 1.5, 1.3,
+                    1.4, 1.7, 1.6, 1.8, 2.0, 1.9, 1.5, 1.0, 0.9, 0.7, 0.6, 0.5)
+ci_lower <- point_estimate - 0.2
+ci_upper <- point_estimate + 0.2
+
+# Create a data frame
+data <- data.frame(hour, point_estimate, ci_lower, ci_upper)
+
+# Reorder the data frame to have the highest hazard estimates in the morning
+data <- data[order(-data$point_estimate), ]
+
+# Create the plot
+ggplot(data, aes(x = hour, y = point_estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
+  labs(x = "HRV hour of the Day", y = "CVD Incidence Rate (Hazard Estimate)") +
+  ggtitle("Hourly HRV CVD risk") +
+  theme_classic()
+
 ```

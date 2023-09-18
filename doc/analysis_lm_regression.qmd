@@ -1,0 +1,245 @@
+---
+title: "analysis_backup"
+format: html
+editor: visual
+---
+
+```{r, include = F}
+library(here)
+source(here("R/library_packages.R"))
+source(here("R/analysis.R"))
+```
+
+Individuals had the actiheart monitor for a least 48 hours
+
+Include individuals with complete case
+
+# Descriptive
+
+```{r}
+pro_data %>% 
+    select(age_fup,sex,
+               alchol_week_unit_total,PAEE_kj_kg_day,smoking_status,
+               bmi,waist_av,fat_pc,
+               p_lab_hba1c,
+               p_lab_trig,p_lab_hdlc,p_lab_ldl,p_lab_chol,
+               sbp_av,dbp_av
+               ,SDNN, RMSSD) %>% 
+    tbl_summary(
+        statistic = list(
+            all_continuous() ~ "{mean} ({sd})"
+        ),
+        missing = "no") %>% 
+    as_flex_table()
+```
+
+## by sex
+
+```{r}
+pro_data %>% 
+    select(age_fup,sex,
+               alchol_week_unit_total,PAEE_kj_kg_day,smoking_status,
+               bmi,waist_av,fat_pc,
+               p_lab_hba1c,
+               p_lab_trig,p_lab_hdlc,p_lab_ldl,p_lab_chol,
+               sbp_av,dbp_av
+               ,SDNN, RMSSD) %>% 
+    tbl_summary(by = "sex",
+        statistic = list(
+            all_continuous() ~ "{mean} ({sd})"
+        ),
+        missing = "no") %>% 
+    as_flex_table()
+```
+
+## Univariate analysis of SDNN
+
+```{r}
+# Univariate analysis
+
+uni_var <- tbl_uvregression(
+    pro_data[c("age_fup","p_gv_sex",
+               "alchol_week_unit_total","PAEE_kj_kg_day","smoke_yn_num",
+               "bmi","waist_av","fat_pc",
+               "p_lab_hba1c",
+               "p_lab_trig","p_lab_hdlc","p_lab_ldl","p_lab_chol",
+               "sbp_av","dbp_av"
+               ,"SDNN")
+],
+method = lm,
+y = SDNN)
+
+```
+
+## Multivariate analysis of SDNN
+
+```{r}
+#Lifestyle markers
+alchol_week_unit_total <- lm(SDNN ~ alchol_week_unit_total + p_gv_sex + age_fup , data= pro_data)
+alchol_week_unit_total_est <- tbl_regression(alchol_week_unit_total, include = alchol_week_unit_total)
+
+smoke_yn_num <- lm(SDNN ~ smoke_yn_num + p_gv_sex + age_fup , data= pro_data)
+smoke_yn_num_est <- tbl_regression(smoke_yn_num, include = smoke_yn_num)
+
+PAEE_kj <- lm(SDNN ~ PAEE_kj_kg_day + p_gv_sex + age_fup, data= pro_data)
+PAEE_kj_est <- tbl_regression(PAEE_kj, include = PAEE_kj_kg_day)
+
+
+
+# Obesity markers
+waist_av <- lm(SDNN ~ waist_av + p_gv_sex + age_fup , data= pro_data)
+waist_av_est <- tbl_regression(waist_av, include = waist_av)
+fat_pc <- lm(SDNN ~ fat_pc + p_gv_sex + age_fup , data= pro_data)
+fat_pc_est <- tbl_regression(fat_pc, include = fat_pc)
+bmi <- lm(SDNN ~ bmi + p_gv_sex + age_fup, data= pro_data)
+bmi_est <- tbl_regression(bmi, include = bmi)
+
+# Glucose metabolism
+p_lab_hba1c <- lm(SDNN ~ p_lab_hba1c + p_gv_sex + age_fup , data= pro_data)
+p_lab_hba1c_est <- tbl_regression(p_lab_hba1c, include = p_lab_hba1c)
+
+# Lipids
+p_lab_trig <- lm(SDNN ~ p_lab_trig + p_gv_sex + age_fup , data= pro_data)
+p_lab_trig_est <- tbl_regression(p_lab_trig, include = p_lab_trig)
+p_lab_hdlc <- lm(SDNN ~ p_lab_hdlc + p_gv_sex + age_fup , data= pro_data)
+p_lab_hdlc_est <- tbl_regression(p_lab_hdlc, include = p_lab_hdlc)
+
+p_lab_ldl<- lm(SDNN ~ p_lab_ldl + p_gv_sex + age_fup, data= pro_data)
+p_lab_ldl_est <- tbl_regression(p_lab_ldl, include = p_lab_ldl)
+
+p_lab_chol<- lm(SDNN ~ p_lab_chol+ p_gv_sex + age_fup, data= pro_data)
+p_lab_chol_est <- tbl_regression(p_lab_chol, include = p_lab_chol)
+
+# Blood pressure
+
+sbp_av <- lm(SDNN ~ sbp_av + p_gv_sex + age_fup, data= pro_data)
+sbp_av_est <- tbl_regression(sbp_av, include = sbp_av)
+dbp_av <- lm(SDNN ~ dbp_av + p_gv_sex + age_fup, data= pro_data)
+dbp_av_est <- tbl_regression(dbp_av, include = dbp_av)
+
+
+
+multi_var<- tbl_stack(list(alchol_week_unit_total_est,smoke_yn_num_est, 
+                           PAEE_kj_est, 
+                           bmi_est,waist_av_est,fat_pc_est,
+                            p_lab_hba1c_est,
+                           p_lab_trig_est ,p_lab_hdlc_est, p_lab_ldl_est, p_lab_chol_est,
+                           sbp_av_est, dbp_av_est
+                           ))
+```
+
+**Cardiovascular risk factors association with SDNN**
+
+```{r}
+tbl_merge(list(uni_var, multi_var),
+          tab_spanner = c("Univariate", "Adjusted")) %>% 
+    as_flex_table()
+```
+
+# Cardiovascular risk factors association with RMSSD
+
+## Univariate analysis of RMSSD
+
+```{r}
+# Univariate analysis
+
+uni_var_rmssd <- tbl_uvregression(
+    pro_data[c("age_fup","p_gv_sex",
+               "alchol_week_unit_total","PAEE_kj_kg_day","smoke_yn_num",
+               "bmi","waist_av","fat_pc",
+               "p_lab_hba1c",
+               "p_lab_trig","p_lab_hdlc","p_lab_ldl","p_lab_chol",
+               "sbp_av","dbp_av"
+               ,"RMSSD")
+],
+method = lm,
+y = RMSSD)
+
+```
+
+## Multivariate analysis of RMSSD
+
+```{r}
+# Obesity markers
+waist_av <- lm(RMSSD ~ waist_av + p_gv_sex + age_fup , data= pro_data)
+waist_av_est <- tbl_regression(waist_av, include = waist_av)
+fat_pc <- lm(RMSSD ~ fat_pc + p_gv_sex + age_fup , data= pro_data)
+fat_pc_est <- tbl_regression(fat_pc, include = fat_pc)
+bmi <- lm(RMSSD ~ bmi + p_gv_sex + age_fup, data= pro_data)
+bmi_est <- tbl_regression(bmi, include = bmi)
+
+# Glucose metabolism
+p_lab_hba1c <- lm(RMSSD ~ p_lab_hba1c + p_gv_sex + age_fup , data= pro_data)
+p_lab_hba1c_est <- tbl_regression(p_lab_hba1c, include = p_lab_hba1c)
+
+# Lipids
+p_lab_trig <- lm(RMSSD ~ p_lab_trig + p_gv_sex + age_fup , data= pro_data)
+p_lab_trig_est <- tbl_regression(p_lab_trig, include = p_lab_trig)
+p_lab_hdlc <- lm(RMSSD ~ p_lab_hdlc + p_gv_sex + age_fup , data= pro_data)
+p_lab_hdlc_est <- tbl_regression(p_lab_hdlc, include = p_lab_hdlc)
+
+p_lab_ldl<- lm(RMSSD ~ p_lab_ldl + p_gv_sex + age_fup, data= pro_data)
+p_lab_ldl_est <- tbl_regression(p_lab_ldl, include = p_lab_ldl)
+
+p_lab_chol<- lm(RMSSD ~ p_lab_chol+ p_gv_sex + age_fup, data= pro_data)
+p_lab_chol_est <- tbl_regression(p_lab_chol, include = p_lab_chol)
+
+# Blood pressure
+
+sbp_av <- lm(RMSSD ~ sbp_av + p_gv_sex + age_fup, data= pro_data)
+sbp_av_est <- tbl_regression(sbp_av, include = sbp_av)
+
+dbp_av <- lm(RMSSD ~ dbp_av + p_gv_sex + age_fup, data= pro_data)
+dbp_av_est <- tbl_regression(dbp_av, include = dbp_av)
+
+
+
+multi_var_rmssd <- tbl_stack(list(bmi_est, waist_av_est, fat_pc_est,
+                           p_lab_hba1c_est,
+                           p_lab_trig_est,p_lab_hdlc_est, p_lab_ldl_est, p_lab_chol_est,
+                           sbp_av_est, dbp_av_est
+                           ))
+
+```
+
+**Cardiovascular risk factors association with RMSSD**
+
+```{r}
+tbl_merge(list(uni_var_rmssd, multi_var_rmssd),
+          tab_spanner = c("Univariate", "Adjusted")) %>% 
+    as_flex_table()
+```
+
+**Cardiovascular risk factors association with SDNN and RMSSD**
+
+```{r}
+tbl_merge(list(uni_var,multi_var,uni_var_rmssd, multi_var_rmssd),
+          tab_spanner = c("Univariate SDNN", "Adjusted SDNN","Univariate RMSSD", "Adjusted RMSSD")) %>% 
+    as_flex_table()
+```
+
+**Lipids and glucose risk factors association with SDNN and RMSSD**
+
+```{r}
+# Glucose metabolism
+p_lab_hba1c_m2 <- lm(SDNN ~ p_lab_hba1c + p_gv_sex + age_fup +  p_lab_trig +
+                      p_lab_chol + alchol_week_unit_total + PAEE_kj_kg_day + smoke_yn_num + bmi, data = pro_data)
+
+p_lab_hba1c_m2_est <- tbl_regression(p_lab_hba1c_m2)
+p_lab_hba1c_m2_est
+
+# Lipids
+p_lab_trig_m2 <- lm(RMSSD ~ p_lab_trig + p_gv_sex + age_fup + alchol_week_unit_total +  PAEE_kj_kg_day + smoke_yn_num + bmi + p_lab_hba1c, data= pro_data)
+
+p_lab_trig_m2_est <- tbl_regression(p_lab_trig_m2)
+p_lab_trig_m2_est
+
+p_lab_hdlc <- lm(RMSSD ~ p_lab_hdlc + p_gv_sex + age_fup , data= pro_data)
+p_lab_hdlc_est <- tbl_regression(p_lab_hdlc, include = p_lab_hdlc)
+
+p_lab_ldl<- lm(RMSSD ~ p_lab_ldl + p_gv_sex + age_fup, data= pro_data)
+p_lab_ldl_est <- tbl_regression(p_lab_ldl, include = p_lab_ldl)
+
+p_lab_chol<- lm(RMSSD ~ p_lab_chol + p_gv_sex + age_fup, data= pro_data)
+p_lab_chol_est <- tbl_regression(p_lab_chol, include = p_lab_chol)
+```

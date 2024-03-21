@@ -1,0 +1,306 @@
+---
+title: "DAG"
+format: html
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library("ggdag")
+library("ggplot2")
+library(dagitty)
+```
+
+# Long-term HRV and CVD
+
+```{r}
+#| echo: false
+
+
+HRV_cycle_DAG <- dagitty('dag {
+bb="0,0,1,1"
+Age [pos="0.283,0.038"]
+Alcohol [pos="0.647,0.184"]
+Anti_hypertensive_medication [pos="0.653,0.887"]
+BMI [pos="0.214,0.778"]
+CVD [outcome,pos="0.830,0.397"]
+Cholesterol [pos="0.393,0.788"]
+Glucose_lowering_medication [pos="0.801,0.746"]
+HRV [exposure,pos="0.115,0.398"]
+HbA1c [pos="0.231,0.635"]
+Physical_activity [pos="0.595,0.019"]
+Prior_CVD [pos="0.639,0.647"]
+SES [pos="0.347,0.021"]
+Sex [pos="0.232,0.073"]
+Smoking [pos="0.676,0.090"]
+Baseline_heart_rate [pos="0.114,0.205"]
+Heart_rate [pos="0.432,0.325"]
+Systolic_blood_pressure [pos="0.420,0.477"]
+Age -> CVD
+Age -> HRV
+Alcohol -> CVD
+Alcohol -> HRV
+Anti_hypertensive_medication -> CVD
+Anti_hypertensive_medication -> HRV
+Anti_hypertensive_medication -> Systolic_blood_pressure
+BMI -> CVD
+BMI -> Cholesterol
+BMI -> HRV
+BMI -> HbA1c
+Cholesterol -> CVD
+Cholesterol -> HRV
+Glucose_lowering_medication -> CVD
+Glucose_lowering_medication -> HRV
+HRV -> CVD
+HRV -> Heart_rate
+HRV -> Systolic_blood_pressure
+HbA1c -> CVD
+HbA1c -> Glucose_lowering_medication
+HbA1c -> HRV
+Physical_activity -> CVD
+Physical_activity -> HRV
+Prior_CVD -> Anti_hypertensive_medication
+Prior_CVD -> CVD
+Prior_CVD -> HRV
+Prior_CVD -> Systolic_blood_pressure
+SES -> CVD
+SES -> HRV
+Sex -> CVD
+Sex -> HRV
+Smoking -> CVD
+Smoking -> HRV
+Systolic_blood_pressure -> CVD
+Baseline_heart_rate -> HRV
+Heart_rate -> CVD
+
+}
+')
+
+ plot( HRV_cycle_DAG )
+```
+
+```{r}
+#| echo: false
+
+HRV_cycle_DAG%>%
+ggdag(text = FALSE) +
+        geom_dag_node(color="darkgreen") +
+    theme_dag() + theme(legend.position = "none") +
+    geom_dag_label(color="black", size = 2.75) +
+     scale_adjusted()   
+
+```
+
+```{r}
+#| echo: false
+
+dagitty('dag {
+bb="0,0,1,1"
+Age [pos="0.551,0.061"]
+Alcohol [pos="0.257,0.164"]
+Anti_hypertensive_medication [pos="0.785,0.715"]
+BMI [pos="0.065,0.604"]
+CVD [outcome,pos="0.830,0.397"]
+Cholesterol [pos="0.197,0.756"]
+Glucose_lowering_medication [pos="0.620,0.790"]
+HRV [exposure,pos="0.306,0.407"]
+HbA1c [pos="0.303,0.584"]
+Physical_activity [pos="0.150,0.045"]
+Prior_CVD [pos="0.637,0.593"]
+SES [pos="0.683,0.057"]
+Sex [pos="0.404,0.059"]
+Smoking [pos="0.165,0.264"]
+baseline_heart_rate [pos="0.173,0.404"]
+heart_rate [pos="0.816,0.201"]
+Systolic_blood_pressure [pos="0.368,0.730"]
+Age -> CVD
+Age -> HRV
+Alcohol -> CVD
+Alcohol -> HRV
+Anti_hypertensive_medication -> CVD
+BMI -> CVD
+BMI -> Cholesterol
+BMI -> HRV
+BMI -> HbA1c
+Cholesterol -> CVD
+Cholesterol -> HRV
+Glucose_lowering_medication -> CVD
+HRV -> CVD
+HRV -> Prior_CVD
+HRV -> heart_rate
+HRV -> Systolic_blood_pressure
+HbA1c -> CVD
+HbA1c -> Glucose_lowering_medication
+HbA1c -> HRV
+Physical_activity -> BMI
+Physical_activity -> CVD
+Physical_activity -> HRV
+Prior_CVD -> Anti_hypertensive_medication
+Prior_CVD -> CVD
+SES -> CVD
+SES -> HRV
+Sex -> CVD
+Sex -> HRV
+Smoking -> CVD
+Smoking -> HRV
+Baseline_heart_rate -> HRV
+heart_rate -> CVD
+Systolic_blood_pressure -> Anti_hypertensive_medication
+Systolic_blood_pressure -> CVD
+Systolic_blood_pressure -> Prior_CVD
+}') %>% 
+ggdag(text = FALSE) +
+        geom_dag_node(color="darkgreen") +
+    theme_dag() + theme(legend.position = "none") +
+    geom_dag_label(color="black", size = 2.75) +
+     scale_adjusted()   
+
+```
+
+Minimal adjustments:
+
+**Model 1: Age, Sex**
+
+**Model 2: Age, SES, Sex, Alcohol, Physical_activity, Smoking, BMI, Cholesterol, HbA1c**
+
+**Model 3: Age, SES, Sex, Alcohol, Physical_activity, Smoking, BMI, Cholesterol, HbA1c + Systolic_blood_pressure**
+
+**Model 4: Age, SES, Sex, Alcohol, Physical_activity, Smoking, BMI, Cholesterol, HbA1c + Systolic_blood_pressure + Glucose_lowering_medication + Prior_CVD + Anti_hypertensive_medication**
+
+In addition pre-adjusted HRV for baseline heart rate will be performed to correct for cealling effect
+
+# HRV hour and CVD
+
+```{r}
+#| echo: false
+
+DAG_HRV_hour <- dagitty('dag {
+bb="0,0,1,1"
+Age [pos="0.283,0.038"]
+Alcohol [pos="0.674,0.092"]
+Anti_hypertensive_medication [pos="0.625,0.847"]
+BMI [pos="0.191,0.829"]
+CVD [outcome,pos="0.788,0.426"]
+Cholesterol [pos="0.401,0.817"]
+Glucose_lowering_medication [pos="0.795,0.752"]
+HRV_Hour [exposure,pos="0.141,0.408"]
+HbA1c [pos="0.231,0.635"]
+Heart_rate_Hour [pos="0.119,0.161"]
+Physical_activity_Hour [pos="0.065,0.229"]
+Prior_CVD [pos="0.639,0.647"]
+SES [pos="0.347,0.021"]
+Sex [pos="0.232,0.073"]
+Smoking [pos="0.676,0.025"]
+Systolic_blood_pressure [pos="0.441,0.472"]
+Age -> CVD
+Age -> HRV_Hour
+Alcohol -> CVD
+Alcohol -> HRV_Hour
+Anti_hypertensive_medication -> CVD
+Anti_hypertensive_medication -> HRV_Hour
+BMI -> CVD
+BMI -> Cholesterol
+BMI -> HRV_Hour
+BMI -> HbA1c
+Cholesterol -> CVD
+Cholesterol -> HRV_Hour
+Glucose_lowering_medication -> CVD
+HRV_Hour -> CVD
+HRV_Hour -> Systolic_blood_pressure
+HbA1c -> CVD
+HbA1c -> Glucose_lowering_medication
+HbA1c -> HRV_Hour
+Heart_rate_Hour -> HRV_Hour
+Physical_activity_Hour -> HRV_Hour
+Prior_CVD -> Anti_hypertensive_medication
+Prior_CVD -> CVD
+Prior_CVD -> HRV_Hour
+Prior_CVD -> Systolic_blood_pressure
+SES -> CVD
+SES -> HRV_Hour
+Sex -> CVD
+Sex -> HRV_Hour
+Smoking -> CVD
+Smoking -> HRV_Hour
+Systolic_blood_pressure -> CVD
+}'
+)
+
+plot(DAG_HRV_hour)
+```
+
+```{r}
+#| echo: false
+
+DAG_HRV_hour %>%
+ggdag(text = FALSE) +
+        geom_dag_node(color="darkgreen") +
+    theme_dag() + theme(legend.position = "none") +
+    geom_dag_label(color="black", size = 2.75) +
+     scale_adjusted()  
+```
+
+```{r}
+#| echo: false
+
+dagitty('dag {
+bb="0,0,1,1"
+Age [pos="0.488,0.115"]
+Alcohol [pos="0.304,0.068"]
+Anti_hypertensive_medication [pos="0.693,0.633"]
+BMI [pos="0.187,0.741"]
+CVD [outcome,pos="0.788,0.426"]
+Cholesterol [pos="0.235,0.530"]
+Glucose_lowering_medication [pos="0.814,0.800"]
+HRV_Hour [exposure,pos="0.408,0.417"]
+HbA1c [pos="0.334,0.816"]
+Heart_rate_Hour [pos="0.197,0.300"]
+Physical_activity_Hour [pos="0.098,0.422"]
+Prior_CVD [pos="0.502,0.514"]
+SES [pos="0.715,0.127"]
+Sex [pos="0.605,0.031"]
+Smoking [pos="0.127,0.078"]
+Systolic_blood_pressure [pos="0.408,0.663"]
+Age -> CVD
+Age -> HRV_Hour
+Alcohol -> CVD
+Alcohol -> HRV_Hour
+Alcohol -> Heart_rate_Hour
+Anti_hypertensive_medication -> CVD
+BMI -> CVD
+BMI -> Cholesterol
+BMI -> HRV_Hour
+BMI -> HbA1c
+Cholesterol -> CVD
+Cholesterol -> HRV_Hour
+Glucose_lowering_medication -> CVD
+HRV_Hour -> CVD
+HRV_Hour -> Systolic_blood_pressure
+HbA1c -> CVD
+HbA1c -> Glucose_lowering_medication
+HbA1c -> HRV_Hour
+Heart_rate_Hour -> HRV_Hour
+Physical_activity_Hour -> HRV_Hour
+Physical_activity_Hour -> Heart_rate_Hour
+Prior_CVD -> Anti_hypertensive_medication
+Prior_CVD -> CVD
+Prior_CVD -> HRV_Hour
+SES -> CVD
+SES -> HRV_Hour
+Sex -> CVD
+Sex -> HRV_Hour
+Smoking -> CVD
+Smoking -> HRV_Hour
+Smoking -> Heart_rate_Hour
+Systolic_blood_pressure -> Anti_hypertensive_medication
+Systolic_blood_pressure -> CVD
+}
+'
+) %>% 
+    ggdag(text = FALSE) +
+        geom_dag_node(color="darkgreen") +
+    theme_dag() + theme(legend.position = "none") +
+    geom_dag_label(color="black", size = 2.75) +
+     scale_adjusted()  
+```

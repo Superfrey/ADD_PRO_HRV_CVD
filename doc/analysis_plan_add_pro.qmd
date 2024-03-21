@@ -1,11 +1,10 @@
 ---
 title: "Statistical analysis plan for ADDITION PRO study"
 format:
-  docx:
+  pdf:
     number-sections: true
     highlight-style: github
 number-sections: true
-
 ---
 
 ## Title: Long-term weekly heart rate variability association with cardiovascular disease in prediabetes -- a prospective cohort-study from the ADDITION-PRO
@@ -52,7 +51,7 @@ In the statistical analysis, we would like to use two approaches. One traditiona
 
 We will investigate two aims in our analysis: 1) Determine the association between week-long HRV and CVD; 2) Determine the diurnal variation in hourly HRV association to future CVD.
 
-For the first objective, we will use poisson regression models to investigate the association between week long heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as all-cause mortality. We will fit two models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c, and Model 3 with further adjustments of anti-hypertensive, and glucose-lowering medication. The incidence rate by increase in HRV from the poisson models will be presented in table 3. Because of biological differences in sex with regard to the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
+For the first objective, we will use poisson regression models to investigate the association between week long heart rate variability indices and hard cardiovascular diseases outcomes (including myocardial infarction, stroke, and heart failure) as well as all-cause mortality. We will fit three models. Model 1 will include adjustments of age and sex. In addition to these, Model 2 will include alcohol consumption, smoking behavior, diet, physical activity, education, systolic blood pressure, body mass index, total cholesterol, and Hba1c, and Model 3 with further adjustments of anti-hypertensive, and glucose-lowering medication. The incidence rate by increase in HRV from the poisson models will be presented in table 3. Because of biological differences in sex with regard to the development CVD and women genuinely having a lower heart rate variability than men, we want to investigate the stratified association by sex.
 
 To investigate for non-linearity (splines), we included defined knots based on percentiles in HRV distribution. The results from the spline models will by visualized in figure 2.
 
@@ -74,20 +73,6 @@ Use all available data as detailed as possible to look into predicting CVD event
 
 List of variables
 
-*ADDITION-PRO general variabels*
-
-addpro \<- addpro %\>% select(age_fup, p_gv_sex,
-
-smoke_q\_4_a, smoke_cigarettes_day_q4_b, p_gq_smoke, PAEE_kj_kg_day, alkohol_week_unit_total,
-
-bmi, height, waist_av ,fat_pc, isi, vat, sat,
-
-sbp_av, dbp_av ,
-
-p_lab_ldl, p_lab_hdlc, p_lab_chol, p_lab_trig,
-
-p_lab_hba1c, homa_ir, homa_b, homa_s, p_lab_pglu_0,p_lab_pglu_30, p_lab_pglu_120,)
-
 +-----------------------------------------------------------------------+----------------------+---------------------------+
 | **Variables from ADDITION-PRO dataset**                               | Available at DST     | variable name             |
 +=======================================================================+======================+===========================+
@@ -97,7 +82,7 @@ p_lab_hba1c, homa_ir, homa_b, homa_s, p_lab_pglu_0,p_lab_pglu_30, p_lab_pglu_120
 +-----------------------------------------------------------------------+----------------------+---------------------------+
 | Socioeconomic status                                                  | x                    |                           |
 +-----------------------------------------------------------------------+----------------------+---------------------------+
-| Smoking status                                                        | x                    | smoke_q\_4_a              |
+| Smoking status                                                        | x                    | smoke_q_4_a               |
 |                                                                       |                      |                           |
 |                                                                       |                      | smoke_cigarettes_day_q4_b |
 |                                                                       |                      |                           |
@@ -220,95 +205,55 @@ p_lab_hba1c, homa_ir, homa_b, homa_s, p_lab_pglu_0,p_lab_pglu_30, p_lab_pglu_120
 
 **Table 1** Population characteristics by diabetes status
 
-+-------------------------------------------------------+----------------------------------+
 |                                                       | Study population in ADDITION-PRO |
-+=======================================================+==================================+
+|-------------------------------------------------------|----------------------------------|
 | Age (years)                                           |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Sex (male)                                            |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Socioeconomic status                                  |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Smoking status                                        |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Physical activity (PAEE kj_kg_day)                    |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Alcohol comsuption (units per week)                   |                                  |
-+-------------------------------------------------------+----------------------------------+
 | BMI (kg/m^2^)                                         |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Waist circumference (cm)                              |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Fat percentage ( % )                                  |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Systolic blood pressure (mm hg)                       |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Diastolic blood pressure (mm hg)                      |                                  |
-+-------------------------------------------------------+----------------------------------+
 | HbA1c (%)                                             |                                  |
-+-------------------------------------------------------+----------------------------------+
 | LDL cholestorol (mmol/L)                              |                                  |
-+-------------------------------------------------------+----------------------------------+
 | HDL cholesterol (mmol/L)                              |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Triglycerides (mmol/L)                                |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Mean heart rate (bpm)                                 |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Median heart rate (bpm)                               |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Standard deviation of Normal to Normal intervals (ms) |                                  |
-+-------------------------------------------------------+----------------------------------+
 | Root mean squared of successive RR intervals (ms)     | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | pNN50 (ms)                                            | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | SDSD (ms)                                             |                                  |
-+-------------------------------------------------------+----------------------------------+
 | High frequency (ms^2^)                                | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | Low frequency (ms^2^)                                 | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | Low frequency / high frequency (ratio)                | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | Ultra low frequency (ms^2^)                           | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 | Ultra high frequency (ms^2^)                          | *Not possible*                   |
-+-------------------------------------------------------+----------------------------------+
 
 **Table 2** CVD and mortality incident in study population
 
-+-----------------+-------------------------------------+-------------------------------------------+
 |                 | Incidents CVD (cases per 1000 year) | Incidents mortality (cases per 1000 year) |
-+=================+=====================================+===========================================+
+|-----------------|-------------------------------------|-------------------------------------------|
 | All             |                                     |                                           |
-+-----------------+-------------------------------------+-------------------------------------------+
 | 1st tertile HRV |                                     |                                           |
-+-----------------+-------------------------------------+-------------------------------------------+
 | 2nd tertile HRV |                                     |                                           |
-+-----------------+-------------------------------------+-------------------------------------------+
 | 3rd tertile HRV |                                     |                                           |
-+-----------------+-------------------------------------+-------------------------------------------+
 
 **Table 3** Heart rate variability indices associated with CVD
 
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 |                    | **Model 1: IRR (95% CI)** |                     | **Model 2: IRR (95% CI)** |                     |
-+====================+===========================+=====================+===========================+=====================+
+|--------------------|---------------------------|---------------------|---------------------------|---------------------|
 |                    | CVD events                | All cause mortality | CVD events                | All cause mortality |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 |                    | n=x                       |                     | n=x                       |                     |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 | SDNN (per unit)    | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 1.xx)        | 0.xx (0.xx - 1.xx)  |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 |                    |                           |                     |                           |                     |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 |                    |                           |                     |                           |                     |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 |                    |                           |                     |                           |                     |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 | mean HR (per unit) | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  | 0.xx (0.xx - 0.xx)        | 0.xx (0.xx - 0.xx)  |
-+--------------------+---------------------------+---------------------+---------------------------+---------------------+
 
 \newpage
 

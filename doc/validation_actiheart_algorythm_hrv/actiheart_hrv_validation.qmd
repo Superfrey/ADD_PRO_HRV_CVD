@@ -1,0 +1,110 @@
+---
+title: "Actiheart_HRV_validation"
+format: html
+editor: visual
+---
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(here)
+library(vroom)
+library(ggplot2)
+source(here::here("R/hrv_functions/1_generate_IBI_data.R"))
+source(here::here("R/hrv_functions/2_hrv_indices_calculations_functions.R"))
+validation_HRV <- vroom(here::here("data/validation_HRV_8beat_data.csv"))
+
+```
+
+
+# Description of HRV calculation 
+
+based on 30 seconds segment with mean heart rate and 95% prediction interval
+
+
+## Data description
+
+from physionet
+
+## SDNN
+```{r}
+#| echo: false
+
+validation_HRV %>%
+ggplot(aes(gen_SDNN, SDNN)) +
+    geom_point()
+
+spearmann_sdnn <- cor.test(validation_HRV$gen_SDNN, validation_HRV$SDNN, method=c("spearman"))
+spearmann_sdnn$estimate
+```
+
+## SDANN
+
+```{r}
+#| echo: false
+
+validation_HRV %>%
+    ggplot(aes(gen_SDANN, SDANN)) +
+    geom_point()
+
+spearmann_SDANN <- cor.test(validation_HRV$gen_SDANN, validation_HRV$SDANN, method=c("spearman"))
+spearmann_SDANN$estimate
+```
+
+## SDNNi
+
+```{r}
+#| echo: false
+
+validation_HRV %>%
+    ggplot(aes(gen_SDNNIDX, SDNNIDX)) +
+    geom_point()
+
+spearmann_SDNNIDX <- cor.test(validation_HRV$gen_SDNNIDX, validation_HRV$SDNNIDX, method=c("spearman"))
+spearmann_SDNNIDX$estimate
+```
+
+## RMSSD
+
+```{r}
+#| echo: false
+
+validation_HRV %>%
+    ggplot(aes(gen_RMSSD, RMSSD)) +
+    geom_point()
+
+spearmann_RMSSD <- cor.test(validation_HRV$gen_RMSSD, validation_HRV$RMSSD, method=c("spearman"))
+
+spearmann_RMSSD$estimate
+```
+
+## HRVi
+
+```{r}
+#| echo: false
+
+validation_HRV %>%
+    ggplot(aes(gen_HRVi, HRVi)) +
+    geom_point()
+
+spearmann_HRVi <- cor.test(validation_HRV$gen_HRVi, validation_HRV$HRVi, method=c("spearman"))
+spearmann_HRVi$estimate
+```
+
+## Mean HR
+
+```{r}
+#| echo: false
+
+validation_HRV %>%
+    ggplot(aes(gen_meanHR, meanHR)) +
+    geom_point()
+```
+
+
+# Conclusion
+
+HRV index based on distributed interbeat intervals were valid. HRV index based on interbeat intervals showed more bias which make sence as we do not have or uss order of heartbeat intervals.

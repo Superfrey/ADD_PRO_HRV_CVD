@@ -27,7 +27,9 @@ based on 30 seconds segment with mean heart rate and 95% prediction interval
 
 ## Data description
 
-Interbeat intervals (IBI) from 24-hour electrocardiogram in 22 healthy indiviudals.
+Interbeat intervals (IBI) from 24-hour heart rate recordings in 22 healthy indiviudals.
+Further information about the data has been described elsewhere:
+
 Rossi, A., Da Pozzo, E., Menicagli, D., Tremolanti, C., Priami, C., Sirbu, A., Clifton, D., Martini, C., & Morelli, D. (2020). Multilevel Monitoring of Activity and Sleep in Healthy People (version 1.0.0). PhysioNet. https://doi.org/10.13026/cerq-fc86.
 
 ## SDNN

@@ -27,7 +27,8 @@ based on 30 seconds segment with mean heart rate and 95% prediction interval
 
 ## Data description
 
-from physionet
+Interbeat intervals (IBI) from 24-hour electrocardiogram in 22 healthy indiviudals.
+Rossi, A., Da Pozzo, E., Menicagli, D., Tremolanti, C., Priami, C., Sirbu, A., Clifton, D., Martini, C., & Morelli, D. (2020). Multilevel Monitoring of Activity and Sleep in Healthy People (version 1.0.0). PhysioNet. https://doi.org/10.13026/cerq-fc86.
 
 ## SDNN
 ```{r}
@@ -107,4 +108,4 @@ validation_HRV %>%
 
 # Conclusion
 
-HRV index based on distributed interbeat intervals were valid. HRV index based on interbeat intervals showed more bias which make sence as we do not have or uss order of heartbeat intervals.
+HRV index based on distributed interbeat intervals were reliable and valid. HRV index based on succesive interbeat intervals showed more bias which make sence as we do not have or use order of heartbeat intervals.
